@@ -1,0 +1,2784 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Usage Guide for Rack Management</title>
+  <style type="text/css">.markdown-body {
+box-sizing: border-box;
+min-width: 200px;
+margin: 0 auto;
+padding: 45px;
+font-size: 12px;
+}
+@media (max-width: 767px) {
+.markdown-body {
+padding: 1px;
+}
+}
+.markdown-body table td,
+.markdown-body table th {
+border: 1px solid #dfe2e5;
+padding-left: 2px;
+padding-right: 2px;
+page-break-inside : avoid;
+font-size: 12px;
+}
+.markdown-body ul {
+padding-left: 0;
+margin-left: 2em;
+}
+.markdown-body table th {
+background-color : #DCDCDC;
+}
+.csl-left-margin {
+display: inline;
+}
+.csl-right-inline {
+display: inline;
+}
+p {
+widows : 2;
+}
+a {
+color: #4183c4;
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+.wip {
+font-weight: normal;
+margin-bottom: 0em;
+padding: 0.5em;
+position: relative;
+text-align: left;
+border: 2px ridge #eee;
+}
+.preamble {
+font-weight: bold;
+text-align: right;
+}
+.toc {
+padding-left: 0;
+margin-left: 0em; }
+.toc ul {
+list-style-type: none;
+margin-left: 0em; padding-left: 0em ;
+}
+.toc ul ul {
+list-style-type: none;
+margin-left: 1.5em; padding-left: 0em ;
+list-style-position: outside;
+}
+nav {
+margin-left: 0;
+padding-left: 0;
+}
+body {
+border-collapse: collapse;
+color: #333;
+font-size: 13px;
+font-family: Arial;
+line-height: 1.4;
+word-wrap: break-word;
+}
+h1, h2, h3, h4, h5, h6 {
+font-weight: bold;
+margin-bottom: 16px;
+margin-top: 1em;
+}
+h1 {
+font-size: 2.25em;
+line-height: 1.2;
+}
+h2 {
+font-size: 1.75em;
+line-height: 1.225;
+}
+h1, h2 {
+border-bottom: 1px solid #eee;
+padding-bottom: 0.3em;
+}
+h3 {
+font-size: 1.5em;
+}
+h4 {
+font-size: 1.25em;
+}
+h5 {
+font-size: 1em;
+}
+h6 {
+color: #777;
+font-size: 1em;
+}
+tr:nth-child(2n) {
+background-color: #f8f8f8;
+}
+pre {
+background-color: #f7f7f7;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+white-space: pre-wrap;
+}
+h1 {
+border: none;
+}
+.document {
+font-weight: bold;
+}
+.copyright {
+border: 1px solid #333;
+padding: 0.5em;
+page-break-before: always;
+margin-top: 0;
+margin-bottom: 0;
+font-weight: normal;
+position: relative;
+text-align: left;
+}</style>
+  <style type="text/css">@font-face {
+font-family: octicons-link;
+src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM+8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB/aFGpk3jaTY6xa8JAGMW/O62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v+k/0an2i+itHDw3v2+9+DBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3/I7AtxEJLtzzuZfI+VVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy/Lt7Kc+0vWY/gAgIIEqAN9we0pwKXreiMasxvabDQMM4riO+qxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw+ymhce7vwM9jSqO8JyVd5RH9gyTt2+J/yUmYlIR0s04n6+7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv/ocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi+W2+MjCzMIDApSwvXzC97Z4Ig8N/BxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh/8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT+AEjAwuDFpBmA9KMDEwMCh9i/v8H8sH0/4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9/lqYwOGZxeUelN2U2R6+cArgtCJpauW7UQBqnFkUsjAY/kOU1cP+DAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl+vvmM/byA48e6tWrKArm4ZJlCbdsrxksL1AwWn/yBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO//sdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd/89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF+9JOS0nbaaYDCQfwCJ7Au3AHj+LO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm+EBXuAbHmIMSRMs+4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL+hD7C1xoaHeLJSEao0FEW14ckxC+TU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13/+lm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl+9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O/AdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB///AA8AAQAAAAAAAAAAAAAAAAABAAAAAA==) format('woff');
+}
+.markdown-body .octicon {
+display: inline-block;
+fill: currentColor;
+vertical-align: text-bottom;
+}
+.markdown-body .anchor {
+float: left;
+line-height: 1;
+margin-left: -20px;
+padding-right: 4px;
+}
+.markdown-body .anchor:focus {
+outline: none;
+}
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+color: #1b1f23;
+vertical-align: middle;
+visibility: hidden;
+}
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+text-decoration: none;
+}
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+visibility: visible;
+}
+.markdown-body {
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+color: #24292e;
+line-height: 1.5;
+font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+font-size: 16px;
+line-height: 1.5;
+word-wrap: break-word;
+}
+.markdown-body .pl-c {
+color: #6a737d;
+}
+.markdown-body .pl-c1,
+.markdown-body .pl-s .pl-v {
+color: #005cc5;
+}
+.markdown-body .pl-e,
+.markdown-body .pl-en {
+color: #6f42c1;
+}
+.markdown-body .pl-s .pl-s1,
+.markdown-body .pl-smi {
+color: #24292e;
+}
+.markdown-body .pl-ent {
+color: #22863a;
+}
+.markdown-body .pl-k {
+color: #d73a49;
+}
+.markdown-body .pl-pds,
+.markdown-body .pl-s,
+.markdown-body .pl-s .pl-pse .pl-s1,
+.markdown-body .pl-sr,
+.markdown-body .pl-sr .pl-cce,
+.markdown-body .pl-sr .pl-sra,
+.markdown-body .pl-sr .pl-sre {
+color: #032f62;
+}
+.markdown-body .pl-smw,
+.markdown-body .pl-v {
+color: #e36209;
+}
+.markdown-body .pl-bu {
+color: #b31d28;
+}
+.markdown-body .pl-ii {
+background-color: #b31d28;
+color: #fafbfc;
+}
+.markdown-body .pl-c2 {
+background-color: #d73a49;
+color: #fafbfc;
+}
+.markdown-body .pl-c2:before {
+content: "^M";
+}
+.markdown-body .pl-sr .pl-cce {
+color: #22863a;
+font-weight: 700;
+}
+.markdown-body .pl-ml {
+color: #735c0f;
+}
+.markdown-body .pl-mh,
+.markdown-body .pl-mh .pl-en,
+.markdown-body .pl-ms {
+color: #005cc5;
+font-weight: 700;
+}
+.markdown-body .pl-mi {
+color: #24292e;
+font-style: italic;
+}
+.markdown-body .pl-mb {
+color: #24292e;
+font-weight: 700;
+}
+.markdown-body .pl-md {
+background-color: #ffeef0;
+color: #b31d28;
+}
+.markdown-body .pl-mi1 {
+background-color: #f0fff4;
+color: #22863a;
+}
+.markdown-body .pl-mc {
+background-color: #ffebda;
+color: #e36209;
+}
+.markdown-body .pl-mi2 {
+background-color: #005cc5;
+color: #f6f8fa;
+}
+.markdown-body .pl-mdr {
+color: #6f42c1;
+font-weight: 700;
+}
+.markdown-body .pl-ba {
+color: #586069;
+}
+.markdown-body .pl-sg {
+color: #959da5;
+}
+.markdown-body .pl-corl {
+color: #032f62;
+text-decoration: underline;
+}
+.markdown-body details {
+display: block;
+}
+.markdown-body summary {
+display: list-item;
+}
+.markdown-body a {
+background-color: transparent;
+}
+.markdown-body a:active,
+.markdown-body a:hover {
+outline-width: 0;
+}
+.markdown-body strong {
+font-weight: inherit;
+font-weight: bolder;
+}
+.markdown-body h1 {
+font-size: 2em;
+margin: .67em 0;
+}
+.markdown-body img {
+border-style: none;
+}
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+font-family: monospace,monospace;
+font-size: 1em;
+}
+.markdown-body hr {
+box-sizing: content-box;
+height: 0;
+overflow: visible;
+}
+.markdown-body input {
+font: inherit;
+margin: 0;
+}
+.markdown-body input {
+overflow: visible;
+}
+.markdown-body [type=checkbox] {
+box-sizing: border-box;
+padding: 0;
+}
+.markdown-body * {
+box-sizing: border-box;
+}
+.markdown-body input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+}
+.markdown-body a {
+color: #0366d6;
+text-decoration: none;
+}
+.markdown-body a:hover {
+text-decoration: underline;
+}
+.markdown-body strong {
+font-weight: 600;
+}
+.markdown-body hr {
+background: transparent;
+border: 0;
+border-bottom: 1px solid #dfe2e5;
+height: 0;
+margin: 15px 0;
+overflow: hidden;
+}
+.markdown-body hr:before {
+content: "";
+display: table;
+}
+.markdown-body hr:after {
+clear: both;
+content: "";
+display: table;
+}
+.markdown-body table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+.markdown-body td,
+.markdown-body th {
+padding: 0;
+}
+.markdown-body details summary {
+cursor: pointer;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+margin-bottom: 0;
+margin-top: 0;
+}
+.markdown-body h1 {
+font-size: 32px;
+}
+.markdown-body h1,
+.markdown-body h2 {
+font-weight: 600;
+}
+.markdown-body h2 {
+font-size: 24px;
+}
+.markdown-body h3 {
+font-size: 20px;
+}
+.markdown-body h3,
+.markdown-body h4 {
+font-weight: 600;
+}
+.markdown-body h4 {
+font-size: 16px;
+}
+.markdown-body h5 {
+font-size: 14px;
+}
+.markdown-body h5,
+.markdown-body h6 {
+font-weight: 600;
+}
+.markdown-body h6 {
+font-size: 12px;
+}
+.markdown-body p {
+margin-bottom: 10px;
+margin-top: 0;
+}
+.markdown-body blockquote {
+margin: 0;
+}
+.markdown-body ol,
+.markdown-body ul {
+margin-bottom: 0;
+margin-top: 0;
+padding-left: 0;
+}
+.markdown-body ol ol,
+.markdown-body ul ol {
+list-style-type: lower-roman;
+}
+.markdown-body ol ol ol,
+.markdown-body ol ul ol,
+.markdown-body ul ol ol,
+.markdown-body ul ul ol {
+list-style-type: lower-alpha;
+}
+.markdown-body dd {
+margin-left: 0;
+}
+.markdown-body code,
+.markdown-body pre {
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+font-size: 12px;
+}
+.markdown-body pre {
+margin-bottom: 0;
+margin-top: 0;
+}
+.markdown-body input::-webkit-inner-spin-button,
+.markdown-body input::-webkit-outer-spin-button {
+-webkit-appearance: none;
+appearance: none;
+margin: 0;
+}
+.markdown-body .border {
+border: 1px solid #e1e4e8!important;
+}
+.markdown-body .border-0 {
+border: 0!important;
+}
+.markdown-body .border-bottom {
+border-bottom: 1px solid #e1e4e8!important;
+}
+.markdown-body .rounded-1 {
+border-radius: 3px!important;
+}
+.markdown-body .bg-white {
+background-color: #fff!important;
+}
+.markdown-body .bg-gray-light {
+background-color: #fafbfc!important;
+}
+.markdown-body .text-gray-light {
+color: #6a737d!important;
+}
+.markdown-body .mb-0 {
+margin-bottom: 0!important;
+}
+.markdown-body .my-2 {
+margin-bottom: 8px!important;
+margin-top: 8px!important;
+}
+.markdown-body .pl-0 {
+padding-left: 0!important;
+}
+.markdown-body .py-0 {
+padding-bottom: 0!important;
+padding-top: 0!important;
+}
+.markdown-body .pl-1 {
+padding-left: 4px!important;
+}
+.markdown-body .pl-2 {
+padding-left: 8px!important;
+}
+.markdown-body .py-2 {
+padding-bottom: 8px!important;
+padding-top: 8px!important;
+}
+.markdown-body .pl-3,
+.markdown-body .px-3 {
+padding-left: 16px!important;
+}
+.markdown-body .px-3 {
+padding-right: 16px!important;
+}
+.markdown-body .pl-4 {
+padding-left: 24px!important;
+}
+.markdown-body .pl-5 {
+padding-left: 32px!important;
+}
+.markdown-body .pl-6 {
+padding-left: 40px!important;
+}
+.markdown-body .f6 {
+font-size: 12px!important;
+}
+.markdown-body .lh-condensed {
+line-height: 1.25!important;
+}
+.markdown-body .text-bold {
+font-weight: 600!important;
+}
+.markdown-body:before {
+content: "";
+display: table;
+}
+.markdown-body:after {
+clear: both;
+content: "";
+display: table;
+}
+.markdown-body>:first-child {
+margin-top: 0!important;
+}
+.markdown-body>:last-child {
+margin-bottom: 0!important;
+}
+.markdown-body a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.markdown-body blockquote,
+.markdown-body dl,
+.markdown-body ol,
+.markdown-body p,
+.markdown-body pre,
+.markdown-body table,
+.markdown-body ul {
+margin-bottom: 16px;
+margin-top: 0;
+}
+.markdown-body hr {
+background-color: #e1e4e8;
+border: 0;
+height: .25em;
+margin: 24px 0;
+padding: 0;
+}
+.markdown-body blockquote {
+border-left: .25em solid #dfe2e5;
+color: #6a737d;
+padding: 0 1em;
+}
+.markdown-body blockquote>:first-child {
+margin-top: 0;
+}
+.markdown-body blockquote>:last-child {
+margin-bottom: 0;
+}
+.markdown-body kbd {
+background-color: #fafbfc;
+border: 1px solid #c6cbd1;
+border-bottom-color: #959da5;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #959da5;
+color: #444d56;
+display: inline-block;
+font-size: 11px;
+line-height: 10px;
+padding: 3px 5px;
+vertical-align: middle;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+font-weight: 600;
+line-height: 1.25;
+margin-bottom: 16px;
+margin-top: 24px;
+}
+.markdown-body h1 {
+font-size: 2em;
+}
+.markdown-body h1,
+.markdown-body h2 {
+border-bottom: 1px solid #eaecef;
+padding-bottom: .3em;
+}
+.markdown-body h2 {
+font-size: 1.5em;
+}
+.markdown-body h3 {
+font-size: 1.25em;
+}
+.markdown-body h4 {
+font-size: 1em;
+}
+.markdown-body h5 {
+font-size: .875em;
+}
+.markdown-body h6 {
+color: #6a737d;
+font-size: .85em;
+}
+.markdown-body ol,
+.markdown-body ul {
+padding-left: 2em;
+}
+.markdown-body ol ol,
+.markdown-body ol ul,
+.markdown-body ul ol,
+.markdown-body ul ul {
+margin-bottom: 0;
+margin-top: 0;
+}
+.markdown-body li {
+word-wrap: break-all;
+}
+.markdown-body li>p {
+margin-top: 16px;
+}
+.markdown-body li+li {
+margin-top: .25em;
+}
+.markdown-body dl {
+padding: 0;
+}
+.markdown-body dl dt {
+font-size: 1em;
+font-style: italic;
+font-weight: 600;
+margin-top: 16px;
+padding: 0;
+}
+.markdown-body dl dd {
+margin-bottom: 16px;
+padding: 0 16px;
+}
+.markdown-body table {
+display: block;
+overflow: auto;
+width: 100%;
+}
+.markdown-body table th {
+font-weight: 600;
+}
+.markdown-body table td,
+.markdown-body table th {
+border: 1px solid #dfe2e5;
+padding: 6px 13px;
+}
+.markdown-body table tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+.markdown-body table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+.markdown-body img {
+background-color: #fff;
+box-sizing: content-box;
+max-width: 100%;
+}
+.markdown-body img[align=right] {
+padding-left: 20px;
+}
+.markdown-body img[align=left] {
+padding-right: 20px;
+}
+.markdown-body code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+padding: .2em .4em;
+}
+.markdown-body pre {
+word-wrap: normal;
+}
+.markdown-body pre>code {
+background: transparent;
+border: 0;
+font-size: 100%;
+margin: 0;
+padding: 0;
+white-space: pre-wrap; 
+word-break: normal;
+}
+.markdown-body .highlight {
+margin-bottom: 16px;
+}
+.markdown-body .highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.markdown-body .highlight pre,
+.markdown-body pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+.markdown-body pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+max-width: auto;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+}
+.markdown-body .commit-tease-sha {
+color: #444d56;
+display: inline-block;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+font-size: 90%;
+}
+.markdown-body .blob-wrapper {
+border-bottom-left-radius: 3px;
+border-bottom-right-radius: 3px;
+overflow-x: auto;
+overflow-y: hidden;
+}
+.markdown-body .blob-wrapper-embedded {
+max-height: 240px;
+overflow-y: auto;
+}
+.markdown-body .blob-num {
+-moz-user-select: none;
+-ms-user-select: none;
+-webkit-user-select: none;
+color: rgba(27,31,35,.3);
+cursor: pointer;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+font-size: 12px;
+line-height: 20px;
+min-width: 50px;
+padding-left: 10px;
+padding-right: 10px;
+text-align: right;
+user-select: none;
+vertical-align: top;
+white-space: nowrap;
+width: 1%;
+}
+.markdown-body .blob-num:hover {
+color: rgba(27,31,35,.6);
+}
+.markdown-body .blob-num:before {
+content: attr(data-line-number);
+}
+.markdown-body .blob-code {
+line-height: 20px;
+padding-left: 10px;
+padding-right: 10px;
+position: relative;
+vertical-align: top;
+}
+.markdown-body .blob-code-inner {
+color: #24292e;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+font-size: 12px;
+overflow: visible;
+white-space: pre;
+word-wrap: normal;
+}
+.markdown-body .pl-token.active,
+.markdown-body .pl-token:hover {
+background: #ffea7f;
+cursor: pointer;
+}
+.markdown-body kbd {
+background-color: #fafbfc;
+border: 1px solid #d1d5da;
+border-bottom-color: #c6cbd1;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #c6cbd1;
+color: #444d56;
+display: inline-block;
+font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+line-height: 10px;
+padding: 3px 5px;
+vertical-align: middle;
+}
+.markdown-body :checked+.radio-label {
+border-color: #0366d6;
+position: relative;
+z-index: 1;
+}
+.markdown-body .tab-size[data-tab-size="1"] {
+-moz-tab-size: 1;
+tab-size: 1;
+}
+.markdown-body .tab-size[data-tab-size="2"] {
+-moz-tab-size: 2;
+tab-size: 2;
+}
+.markdown-body .tab-size[data-tab-size="3"] {
+-moz-tab-size: 3;
+tab-size: 3;
+}
+.markdown-body .tab-size[data-tab-size="4"] {
+-moz-tab-size: 4;
+tab-size: 4;
+}
+.markdown-body .tab-size[data-tab-size="5"] {
+-moz-tab-size: 5;
+tab-size: 5;
+}
+.markdown-body .tab-size[data-tab-size="6"] {
+-moz-tab-size: 6;
+tab-size: 6;
+}
+.markdown-body .tab-size[data-tab-size="7"] {
+-moz-tab-size: 7;
+tab-size: 7;
+}
+.markdown-body .tab-size[data-tab-size="8"] {
+-moz-tab-size: 8;
+tab-size: 8;
+}
+.markdown-body .tab-size[data-tab-size="9"] {
+-moz-tab-size: 9;
+tab-size: 9;
+}
+.markdown-body .tab-size[data-tab-size="10"] {
+-moz-tab-size: 10;
+tab-size: 10;
+}
+.markdown-body .tab-size[data-tab-size="11"] {
+-moz-tab-size: 11;
+tab-size: 11;
+}
+.markdown-body .tab-size[data-tab-size="12"] {
+-moz-tab-size: 12;
+tab-size: 12;
+}
+.markdown-body .task-list-item {
+list-style-type: none;
+}
+.markdown-body .task-list-item+.task-list-item {
+margin-top: 3px;
+}
+.markdown-body .task-list-item input {
+margin: 0 .2em .25em -1.6em;
+vertical-align: middle;
+}
+.markdown-body hr {
+border-bottom-color: #eee;
+}
+.markdown-body .pl-0 {
+padding-left: 0!important;
+}
+.markdown-body .pl-1 {
+padding-left: 4px!important;
+}
+.markdown-body .pl-2 {
+padding-left: 8px!important;
+}
+.markdown-body .pl-3 {
+padding-left: 16px!important;
+}
+.markdown-body .pl-4 {
+padding-left: 24px!important;
+}
+.markdown-body .pl-5 {
+padding-left: 32px!important;
+}
+.markdown-body .pl-6 {
+padding-left: 40px!important;
+}
+.markdown-body .pl-7 {
+padding-left: 48px!important;
+}
+.markdown-body .pl-8 {
+padding-left: 64px!important;
+}
+.markdown-body .pl-9 {
+padding-left: 80px!important;
+}
+.markdown-body .pl-10 {
+padding-left: 96px!important;
+}
+.markdown-body .pl-11 {
+padding-left: 112px!important;
+}
+.markdown-body .pl-12 {
+padding-left: 128px!important;
+}
+</style>
+</head>
+
+<body class="markdown-body">
+<div align="center">
+<img role="img" aria-label="Logo" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMTUuMDEgMTI4LjEyIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzVmNjA2Mn08L3N0eWxlPjwvZGVmcz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik03ODkuNTEgMjM5Ljg2YzAtNi45IDIuNS0xMC42IDkuNzQtMTAuNmgxNC4yMmM3LjE2IDAgOS43NSAzLjcgOS43NSAxMC42djEyLjc2YzAgNi44OS0yLjUgMTAuNi05Ljc1IDEwLjZoLTE0LjIyYy03LjI0IDAtOS43NC0zLjcxLTkuNzQtMTAuNnptMjIuMjQgMTUuNjFjMiAwIDMuNDUtLjQ0IDMuNDUtMi42N3YtMTMuMTFjMC0yLjI0LTEuNDYtMi42Ny0zLjQ1LTIuNjdoLTEwLjY4Yy0yIDAtMy40NS40My0zLjQ1IDIuNjd2MTMuMTFjMCAyLjIzIDEuNDYgMi42NyAzLjQ1IDIuNjd6TTgzNyAyMzAuOWExLjczIDEuNzMgMCAwMTEuODEtMS42NGgyMS43MmM3LjI1IDAgOS43NCAzLjcgOS43NCAxMC42IDAgNi42NC0yLjg0IDEwLjI2LTkuNzQgMTAuMjZIODQ1djExLjI5YTEuOCAxLjggMCAwMS0xLjcyIDEuODFoLTQuNTdhMS44IDEuOCAwIDAxLTEuNzItMS44MXptMjEuNTUgMTEuNDZjMi4wNyAwIDMuNy0uMzQgMy43LTIuNjdzLTEuNTUtMi42Ny0zLjUzLTIuNjdIODQ1djUuMzR6bTIzLjE0LTExLjQ2YTEuNzQgMS43NCAwIDAxMS44MS0xLjY0aDI3LjI1YTEuNzMgMS43MyAwIDAxMS44MSAxLjY0djQuMzlhMS44MSAxLjgxIDAgMDEtMS44MSAxLjczaC0yMXY1LjM0aDEzLjU0YTEuODEgMS44MSAwIDAxMS44MSAxLjcydjQuNGExLjczIDEuNzMgMCAwMS0xLjgxIDEuNjRoLTEzLjU4djUuMzVoMjAuOTVhMS44MSAxLjgxIDAgMDExLjgyIDEuNzJ2NC4zOWExLjc0IDEuNzQgMCAwMS0xLjgyIDEuNjRoLTI3LjI0YTEuODEgMS44MSAwIDAxLTEuNzMtMS44MXptNDQuMDggMGExLjczIDEuNzMgMCAwMTEuOC0xLjY0aDIyLjE3YzcuMjQgMCA5Ljc0IDMuNyA5Ljc0IDEwLjZ2MjEuNTVhMS44MiAxLjgyIDAgMDEtMS44MSAxLjgxaC00LjQ4YTEuNzUgMS43NSAwIDAxLTEuNzMtMS44MXYtMjEuNzJjMC0yLjI0LTEuNTUtMi42Ny0zLjQ1LTIuNjdoLTE0LjIydjI0LjM5YTEuODEgMS44MSAwIDAxLTEuNzMgMS44MWgtNC41N2ExLjggMS44IDAgMDEtMS43Mi0xLjgxeiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTY0NC40NyAtMTg1Ljk0KSIvPjxwYXRoIGQ9Ik0xMDYuMjUgNjUuMDN2LTEuODVsLTEuNjIgMS43NVY2MC44aC0xLjIydjQuMTFsLTEuNi0xLjczdjEuODVsMi4yMiAyLjQgMi4yMi0yLjR6TTkzLjIxIDk0LjU5bDEuMzEtMS4zMS0yLjM4LjA4IDIuOTItMi45MS0uODctLjg3LTIuOSAyLjkuMDgtMi4zNi0xLjMxIDEuMzItLjEyIDMuMjcgMy4yNy0uMTJ6bS0zMC4xMyAxMS42N2gxLjg2bC0xLjc1LTEuNjJoNC4xM3YtMS4yM2gtNC4xMWwxLjczLTEuNmgtMS44NmwtMi4zOSAyLjIzIDIuMzkgMi4yMnpNMzMuNTMgOTMuMjFsMS4zMSAxLjMxLS4wOS0yLjM4IDIuOTIgMi45Mi44Ni0uODctMi44OS0yLjkgMi4zNS4wOC0xLjMxLTEuMzEtMy4yNy0uMTIuMTIgMy4yN3pNMjEuODYgNjMuMDl2MS44NWwxLjYyLTEuNzV2NC4xM2gxLjIzdi00LjFsMS42IDEuNzJ2LTEuODVsLTIuMjMtMi40LTIuMjIgMi40em0xMy4wNS0yOS41NmwtMS4zMiAxLjMxIDIuMzktLjA4LTIuOTIgMi45MS44Ny44NyAyLjktMi45LS4wOSAyLjM2IDEuMzEtMS4zMi4xMi0zLjI3LTMuMjYuMTJ6bTMwLjEyLTExLjY3aC0xLjg1bDEuNzUgMS42M0g2MC44djEuMjJoNC4xbC0xLjcyIDEuNmgxLjg1bDIuNC0yLjIyLTIuNC0yLjIzem0yOS41NiAxMy4wNWwtMS4zMi0xLjMxLjA5IDIuMzgtMi45Mi0yLjkyLS44Ni44NyAyLjkgMi45LTIuMzYtLjA4IDEuMzIgMS4zMSAzLjI3LjEyLS4xMi0zLjI3em0xMC40OCAxOS4xN2wtLjQ4LTEuNzktMS4xMiAyLjExLTEuMDYtMy45OS0xLjE5LjMyIDEuMDcgMy45Ny0yLTEuMjYuNDggMS43OSAyLjc3IDEuNzUgMS41My0yLjl6TTEwMC4xMiA4NmwuOTItMS42LTIuMjguNyAyLjA3LTMuNTctMS4wNi0uNjEtMi4wNiAzLjU1LS41Mi0yLjMtLjkzIDEuNjEuNzMgMy4xOSAzLjEzLS45N3ptLTI2LjA4IDE5LjA3bDEuNzktLjQ3LTIuMTEtMS4xMiAzLjk5LTEuMDctLjMyLTEuMTgtMy45NyAxLjA2IDEuMjYtMi0xLjc5LjQ4LTEuNzQgMi43OCAyLjg5IDEuNTJ6bS0zMS45My00Ljk1bDEuNjEuOTItLjctMi4yNyAzLjU3IDIuMDYuNjEtMS4wNi0zLjU1LTIuMDUgMi4zLS41My0xLjYxLS45My0zLjE5LjczLjk2IDMuMTN6TTIzLjA0IDc0LjA0bC40OCAxLjc5IDEuMTItMi4xMSAxLjA2IDMuOTkgMS4xOS0uMzItMS4wNi0zLjk2IDEuOTkgMS4yNS0uNDgtMS43OS0yLjc3LTEuNzQtMS41MyAyLjg5ek0yOCA0Mi4xMmwtLjkzIDEuNjEgMi4yOC0uNzEtMi4wNiAzLjU4IDEuMDYuNiAyLjA1LTMuNTQuNTMgMi4yOS45Mi0xLjYxLS43Mi0zLjE5LTMuMTMuOTd6bTI2LjA4LTE5LjA3bC0xLjguNDggMi4xMSAxLjExLTMuOTggMS4wNy4zMiAxLjE4IDMuOTYtMS4wNi0xLjI1IDIgMS43OS0uNDggMS43NC0yLjc3LTIuODktMS41M3pNODYgMjhsLTEuNjEtLjkzLjcxIDIuMjktMy41OC0yLjA3LS42IDEuMDYgMy41NCAyLjA2LTIuMjkuNTIgMS42LjkzIDMuMTktLjczTDg2IDI4em0xNS4wOSAxNS44bC0uOTMtMS42LS41MyAyLjMyLTIuMDYtMy41Ny0xLjA2LjYxIDIuMDUgMy41Ni0yLjI1LS42OS45MiAxLjYgMy4xMy45Ny43My0zLjJ6bTMuNDggMzIuMTNsLjQ4LTEuOC0yLjAyIDEuMjcgMS4wNi0zLjk4LTEuMTgtLjMyLTEuMDYgMy45Ni0xLjExLTIuMDgtLjQ3IDEuOCAxLjUzIDIuODggMi43Ny0xLjczem0tMjAuMjYgMjUuMTZsMS42MS0uOTMtMi4zMy0uNTIgMy41OC0yLjA3LS42MS0xLjA1TDgzIDk4LjU2bC42OS0yLjI1LTEuNi45My0uOTcgMy4xMiAzLjE5Ljczem0tMzIuMTIgMy40OWwxLjc5LjQ3LTEuMjYtMi4wMiAzLjk4IDEuMDcuMzItMS4xOC0zLjk2LTEuMDcgMi4wOC0xLjEtMS43OS0uNDgtMi45IDEuNTMgMS43NCAyLjc4ek0yNy4wMiA4NC4zMmwuOTMgMS42LjUzLTIuMzIgMi4wNiAzLjU3IDEuMDctLjYxLTIuMDYtMy41NSAyLjI2LjY5LS45My0xLjYxLTMuMTMtLjk2LS43MyAzLjE5ek0yMy41NSA1Mi4ybC0uNDggMS43OSAyLjAyLTEuMjctMS4wNyAzLjk5IDEuMTguMzEgMS4wNy0zLjk2IDEuMSAyLjA4LjQ3LTEuNzktMS41Mi0yLjg5LTIuNzcgMS43NHpNNDMuOCAyNy4wM2wtMS42LjkzIDIuMzIuNTMtMy41NyAyLjA2LjYxIDEuMDYgMy41NS0yLjA1LS42OSAyLjI2IDEuNjEtLjkzLjk2LTMuMTMtMy4xOS0uNzN6bTc3LjkgNDAuNDZoMi44MWwtMi42NS0yLjQ2aDYuMjV2LTEuODVoLTYuMjJsMi42Mi0yLjQ0aC0yLjgxbC0zLjY0IDMuMzcgMy42NCAzLjM4em0tMTkuMzEgMzkuNzVsMS45OSAxLjk5LS4xMy0zLjYyIDQuNDIgNC40MyAxLjMxLTEuMzEtNC40LTQuNCAzLjU3LjEzLTEuOTktMS45OS00Ljk2LS4xOC4xOSA0Ljk1em0tNDEuNzYgMTQuNDV2Mi44MmwyLjQ2LTIuNjV2Ni4yNmgxLjg1di02LjIzbDIuNDQgMi42MnYtMi44Mkw2NCAxMTguMDZsLTMuMzcgMy42M3ptLTM5Ljc1LTE5LjNsLTEuOTkgMS45OSAzLjYxLS4xMy00LjQyIDQuNDIgMS4zMSAxLjMxIDQuNC00LjQtLjEzIDMuNTcgMS45OS0xLjk4LjE4LTQuOTctNC45NS4xOXpNNi40MiA2MC42M0gzLjZsMi42NSAyLjQ2SDB2MS44NWg2LjIyTDMuNiA2Ny4zOGgyLjgyTDEwLjA1IDY0bC0zLjYzLTMuMzd6bTE5LjMxLTM5Ljc1bC0xLjk5LTEuOTkuMTMgMy42MS00LjQyLTQuNDItMS4zMSAxLjMxIDQuNCA0LjQtMy41OC0uMTMgMS45OSAxLjk5IDQuOTYuMTgtLjE4LTQuOTV6TTY3LjQ5IDYuNDJWMy42MWwtMi40NiAyLjY1VjBoLTEuODZ2Ni4yM2wtMi40My0yLjYydjIuODFsMy4zOCAzLjYzIDMuMzctMy42M3ptMzkuNzUgMTkuMzFsMS45OS0yLTMuNjEuMTQgNC40Mi00LjQyLTEuMzItMS4zMS00LjQgNC40LjEzLTMuNTgtMS45OCAxLjk5LS4xOCA0Ljk2IDQuOTUtLjE4em0xMy4zOCAyNi43MmwyLjcyLS43Mi0zLjE5LTEuNjkgNi4wMy0xLjYzLS40OC0xLjc4LTYuMDEgMS42MSAxLjktMy4wMy0yLjcxLjczLTIuNjQgNC4yIDQuMzggMi4zMXptLTguMzYgNDMuNGwyLjQ0IDEuNDEtMS4wNi0zLjQ2IDUuNDEgMy4xMy45Mi0xLjYxLTUuMzgtMy4xMSAzLjQ4LS44LTIuNDQtMS40MS00LjgzIDEuMTEgMS40NiA0Ljc0em0tMzYuNiAyNC43N2wuNzMgMi43MiAxLjY5LTMuMTkgMS42MiA2LjA0IDEuNzktLjQ4LTEuNjEtNi4wMiAzLjAzIDEuOS0uNzItMi43MS00LjIxLTIuNjQtMi4zMiA0LjM4em0tNDMuMzktOC4zNmwtMS40MSAyLjQzIDMuNDUtMS4wNi0zLjEyIDUuNDIgMS42LjkzIDMuMTItNS4zOS44IDMuNDggMS40LTIuNDMtMS4xLTQuODQtNC43NCAxLjQ2ek03LjQ5IDc1LjY2bC0yLjcxLjczIDMuMTkgMS42OS02LjA0IDEuNjIuNDggMS43OSA2LjAyLTEuNjEtMS45MSAzLjAzIDIuNzItLjcyIDIuNjQtNC4yMS00LjM5LTIuMzJ6bTguMzYtNDMuMzlsLTIuNDMtMS40MSAxLjA2IDMuNDUtNS40MS0zLjEyLS45MyAxLjYxIDUuMzkgMy4xMS0zLjQ4LjggMi40MyAxLjQxIDQuODMtMS4xMS0xLjQ2LTQuNzR6bTM2LjYtMjQuNzhsLS43My0yLjcxLTEuNjkgMy4xOS0xLjYxLTYuMDQtMS44LjQ5IDEuNjEgNi4wMS0zLjAzLTEuOS43MyAyLjcxIDQuMiAyLjY0IDIuMzItNC4zOXptNDMuNCA4LjM3bDEuNDEtMi40NC0zLjQ2IDEuMDcgMy4xMy01LjQyLTEuNjEtLjkzLTMuMTEgNS4zOS0uOC0zLjQ5TDkwIDEyLjQ4bDEuMTEgNC44NCA0Ljc0LTEuNDZ6bTE5Ljg0IDIyLjM1bDIuNDQtMS40MS0zLjUyLS44IDUuNDEtMy4xMy0uOTMtMS42MS01LjM5IDMuMTIgMS4wNS0zLjQyLTIuNDQgMS40LTEuNDUgNC43NCA0LjgzIDEuMTF6bTMuMTUgNDQuMDhsMi43Mi43My0xLjkyLTMuMDYgNi4wNCAxLjYxLjQ4LTEuNzktNi4wMS0xLjYxIDMuMTYtMS42Ny0yLjcyLS43My00LjM4IDIuMzIgMi42MyA0LjJ6bS0yOC45MyAzMy40bDEuNCAyLjQ0LjgxLTMuNTMgMy4xMyA1LjQyIDEuNi0uOTMtMy4xMS01LjM5IDMuNDIgMS4wNS0xLjQxLTIuNDQtNC43NC0xLjQ1LTEuMSA0Ljgzem0tNDQuMDggMy4xNWwtLjczIDIuNzIgMy4wNi0xLjkxLTEuNjIgNi4wMyAxLjc5LjQ4IDEuNjEtNi4wMSAxLjY4IDMuMTYuNzMtMi43MS0yLjMzLTQuMzktNC4xOSAyLjYzem0tMzMuNC0yOC45M2wtMi40NCAxLjQxIDMuNTIuODEtNS40MSAzLjEyLjkyIDEuNiA1LjM5LTMuMTEtMS4wNSAzLjQxIDIuNDQtMS4zOSAxLjQ2LTQuNzUtNC44My0xLjF6TTkuMjcgNDUuODJsLTIuNzItLjcyIDEuOTIgMy4wNi02LjAzLTEuNjItLjQ4IDEuOCA2LjAxIDEuNjEtMy4xNyAxLjY3IDIuNzIuNzMgNC4zOC0yLjMyLTIuNjMtNC4yMXptMjguOTQtMzMuMzlMMzYuOCA5Ljk5bC0uODEgMy41Mi0zLjEyLTUuNDEtMS42MS45MyAzLjEyIDUuMzktMy40My0xLjA1IDEuNDEgMi40MyA0Ljc0IDEuNDYgMS4xMS00Ljgzem00NC4wOC0zLjE2bC43My0yLjcxLTMuMDYgMS45MiAxLjYyLTYuMDUtMS44LS40Ny0xLjYxIDYuMDEtMS42OC0zLjE2LS43MiAyLjcxIDIuMzIgNC4zOSA0LjItMi42NHptMTMuMTUgNDguOTJsLTEuNDcuMTkgMS41NiAxLjExLTMuMjguNDMuMTMuOTcgMy4yNi0uNDMtMS4yMSAxLjQ1IDEuNDgtLjE5IDEuNjctMi4wMS0yLjE0LTEuNTJ6bTE0LjIzLTEuMjNsLjMgMi4yOSAxLjcyLTIuNDMuNjggNS4xMiAxLjUyLS4yLS42Ny01LjA5IDIuMjcgMS44OC0uMy0yLjMtMy4xNi0yLjYxLTIuMzYgMy4zNHpNOTAuNCA4Mi4xbC0xLjE4LS45MS4zMiAxLjg5LTIuNjItMi4wMS0uNi43OCAyLjYxIDItMS44OC4xOCAxLjE4LjkgMi42MS0uMjUtLjQ0LTIuNTh6bTEwLjkzIDkuMTlsLTEuNDEgMS44MyAyLjk0LS40OS0zLjE0IDQuMDkgMS4yMS45MyAzLjEzLTQuMDcuMjggMi45NCAxLjQxLTEuODQtLjM5LTQuMDctNC4wMy42OHptLTMxLjQgNC4xNmwtLjItMS40OC0xLjEgMS41Ni0uNDMtMy4yOC0uOTcuMTMuNDMgMy4yNi0xLjQ2LTEuMi4yIDEuNDcgMi4wMSAxLjY2IDEuNTItMi4xMnptMS4yMyAxNC4yMmwtMi4zLjMgMi40NCAxLjcyLTUuMTIuNjguMiAxLjUxIDUuMDktLjY2LTEuODggMi4yNyAyLjMtLjMxIDIuNjEtMy4xNC0zLjM0LTIuMzd6TTQ2LjAyIDkwLjRsLjktMS4xOC0xLjg4LjMzIDIuMDEtMi42Mi0uNzgtLjYtMiAyLjYxLS4xOC0xLjg4LS45IDEuMTcuMjUgMi42MSAyLjU4LS40NHptLTkuMTkgMTAuOTRsLTEuODQtMS40Mi41IDIuOTQtNC4wOS0zLjE0LS45MyAxLjIyIDQuMDcgMy4xMi0yLjk0LjI4IDEuODQgMS40MSA0LjA4LS4zOC0uNjktNC4wM3ptLTQuMTUtMzEuNGwxLjQ3LS4yLTEuNTYtMS4xIDMuMjctLjQ0LS4xMy0uOTctMy4yNS40MyAxLjItMS40NS0xLjQ3LjE5LTEuNjcgMi4wMiAyLjE0IDEuNTJ6bS0xNC4yMyAxLjIzbC0uMy0yLjMtMS43MyAyLjQzLS42OC01LjExLTEuNTEuMi42NyA1LjA4LTIuMjctMS44OC4zIDIuMyAzLjE1IDIuNjIgMi4zNy0zLjM0em0xOS4yNi0yNS4xNWwxLjE4LjktLjMyLTEuODcgMi42MiAyIC42LS43OC0yLjYxLTIgMS44OC0uMTctMS4xOC0uOS0yLjYuMjQuNDMgMi41OHptLTEwLjkzLTkuMTlsMS40Mi0xLjg0LTIuOTUuNTEgMy4xNC00LjEtMS4yMS0uOTItMy4xMiA0LjA3LS4yOC0yLjk1LTEuNDEgMS44NS4zOCA0LjA3IDQuMDMtLjY5em0zMS40LTQuMTVsLjIgMS40NyAxLjEtMS41Ni40NCAzLjI3Ljk3LS4xMi0uNDMtMy4yNiAxLjQ1IDEuMi0uMTktMS40Ny0yLjAyLTEuNjYtMS41MiAyLjEzem0tMS4yMy0xNC4yM2wyLjMtLjMtMi40My0xLjczIDUuMTEtLjY3LS4yLTEuNTEtNS4wOC42NiAxLjg4LTIuMjctMi4zLjMxLTIuNjEgMy4xNCAzLjMzIDIuMzd6TTgyLjEgMzcuNzJsLS45MSAxLjE4IDEuODgtLjMyLTIgMi42MS43Ny42IDIuMDEtMi42LjE3IDEuODcuOS0xLjE4LS4yNC0yLjYtMi41OC40NHptOS4xOS0xMC45M2wxLjgzIDEuNDEtLjUtMi45NCA0LjEgMy4xNC45Mi0xLjIxLTQuMDctMy4xMyAyLjk1LS4yOC0xLjg1LTEuNC00LjA3LjM3LjY5IDQuMDR6bTEuNTYgMjMuNDhsLTEuMzcuNTYgMS43OS42Ni0zLjA1IDEuMjcuMzcuOTEgMy4wNC0xLjI2LS43OSAxLjcyIDEuMzctLjU3IDEuMS0yLjM4LTIuNDYtLjkxem0xMy40My00Ljg3bC44OCAyLjE0IDEuMDQtMi44IDEuOTcgNC43NiAxLjQxLS41OC0xLjk2LTQuNzQgMi42OCAxLjIyLS44OC0yLjE0LTMuNzItMS43LTEuNDIgMy44NHpNOTQuMTcgNzQuNjdsLTEuMzctLjU3Ljc5IDEuNzMtMy4wNS0xLjI2LS4zNy45MSAzLjA0IDEuMjUtMS43Ny42NiAxLjM3LjU3IDIuNDYtLjkxLTEuMS0yLjM4em0xMi45NCA2LjA0bC0uODkgMi4xNCAyLjcxLTEuMjQtMS45NyA0Ljc3IDEuNDEuNTggMS45Ni00Ljc0IDEuMDMgMi43Ni44OS0yLjEzLTEuNDItMy44NC0zLjcyIDEuN3pNNzcuODUgOTIuODZsLS41Ny0xLjM4LS42NiAxLjc5LTEuMjYtMy4wNS0uOTEuMzggMS4yNiAzLjAzLTEuNzItLjc4LjU3IDEuMzcgMi4zOCAxLjA5LjkxLTIuNDV6bTQuODcgMTMuNDJsLTIuMTQuODggMi44IDEuMDQtNC43NyAxLjk3LjU4IDEuNDIgNC43NS0xLjk3LTEuMjMgMi42OSAyLjE0LS44OSAxLjcxLTMuNzItMy44NC0xLjQyek01My40NSA5NC4xN2wuNTctMS4zNy0xLjc0LjggMS4yNy0zLjA1LS45MS0uMzctMS4yNiAzLjAzLS42NS0xLjc3LS41NyAxLjM3LjkxIDIuNDUgMi4zOC0xLjA5em0tNi4wNSAxMi45NGwtMi4xMy0uODkgMS4yNCAyLjcyLTQuNzctMS45OC0uNTggMS40MiA0Ljc0IDEuOTYtMi43NyAxLjAyIDIuMTQuODkgMy44NC0xLjQyLTEuNzEtMy43MnpNMzUuMjYgNzcuODVsMS4zOC0uNTctMS43OS0uNjYgMy4wNC0xLjI2LS4zNy0uOTEtMy4wMyAxLjI2Ljc4LTEuNzEtMS4zNy41Ni0xLjA5IDIuMzggMi40NS45MXptLTEzLjQyIDQuODhsLS44OS0yLjE1LTEuMDMgMi44LTEuOTgtNC43Ny0xLjQxLjU5IDEuOTYgNC43NC0yLjY4LTEuMjMuODkgMi4xNSAzLjcyIDEuNyAxLjQyLTMuODN6bTEyLjEtMjkuMjhsMS4zOC41Ny0uOC0xLjczIDMuMDUgMS4yNi4zNy0uOTEtMy4wMy0xLjI1IDEuNzctLjY2LTEuMzctLjU3LTIuNDUuOTEgMS4wOCAyLjM4em0tMTIuOTMtNi4wNGwuODgtMi4xNS0yLjcxIDEuMjUgMS45OC00Ljc3LTEuNDEtLjU4LTEuOTcgNC43NC0xLjAzLTIuNzYtLjg4IDIuMTQgMS40MiAzLjgzIDMuNzItMS43em0yOS4yNS0xMi4xNWwuNTcgMS4zOC42Ny0xLjc5IDEuMjYgMy4wNS45LS4zOC0xLjI1LTMuMDMgMS43MS43OC0uNTctMS4zNi0yLjM3LTEuMS0uOTIgMi40NXptLTQuODctMTMuNDFsMi4xNC0uODktMi43OS0xLjA0IDQuNzYtMS45Ny0uNTgtMS40MS00Ljc0IDEuOTYgMS4yMi0yLjY5LTIuMTQuODktMS43MSAzLjcyIDMuODQgMS40M3ptMjkuMjcgMTIuMWwtLjU2IDEuMzcgMS43My0uOC0xLjI2IDMuMDUuOS4zOCAxLjI2LTMuMDQuNjYgMS43Ny41Ni0xLjM3LS45LTIuNDUtMi4zOSAxLjA5em02LjA1LTEyLjk0bDIuMTQuODktMS4yNC0yLjcxIDQuNzYgMS45Ny41OS0xLjQxLTQuNzQtMS45NiAyLjc2LTEuMDQtMi4xNC0uODgtMy44MyAxLjQyIDEuNyAzLjcyem03LjU5IDIyLjI3bC0xLjE4LjkxIDEuOTEuMTgtMi42MyAyLjAxLjYuNzggMi42MS0yLjAxLS4zMiAxLjg2IDEuMTgtLjkuNDQtMi41OC0yLjYxLS4yNXpNMTAwIDM1LjFsMS40MiAxLjg0LjI3LTIuOTYgMy4xNCA0LjA4IDEuMjItLjkyLTMuMTMtNC4wNyAyLjkxLjQ4LTEuNDEtMS44My00LjAzLS42OS0uMzkgNC4wN3ptLTQuMTEgMzEuNDFsLTEuNDctLjE5IDEuMjIgMS40Ny0zLjI4LS40NC0uMTMuOTggMy4yNi40My0xLjUzIDEuMDkgMS40Ny4xOSAyLjEzLTEuNTEtMS42Ny0yLjAyek0xMDkuOTUgNjlsLS4zIDIuMyAyLjMtMS45LS42OCA1LjExIDEuNTIuMi42Ny01LjA5IDEuNzEgMi40MS4zLTIuMy0yLjM3LTMuMzQtMy4xNSAyLjYxek04NC44MyA4OC4zMWwtLjktMS4xOC0uMTggMS45LTIuMDEtMi42Mi0uNzguNTkgMi4wMSAyLjYxLTEuODctLjMxLjkxIDEuMTcgMi41OC40NC4yNC0yLjZ6bTguMTggMTEuN2wtMS44MyAxLjQxIDIuOTYuMjgtNC4wOSAzLjE0LjkzIDEuMjEgNC4wNy0zLjEyLS40OSAyLjkgMS44NC0xLjQxLjY5LTQuMDMtNC4wOC0uMzh6bS0zMS40LTQuMTJsLjE5LTEuNDctMS40NyAxLjIyLjQzLTMuMjctLjk3LS4xMy0uNDMgMy4yNi0xLjA5LTEuNTQtLjIgMS40NyAxLjUyIDIuMTMgMi4wMi0xLjY3em0tMi41IDE0LjA2bC0yLjI5LS4zIDEuOSAyLjI5LTUuMTItLjY2LS4xOSAxLjUxIDUuMDguNjctMi40IDEuNzEgMi4zLjMgMy4zNC0yLjM2LTIuNjItMy4xNnptLTE5LjMtMjUuMTFsMS4xOC0uOTEtMS45LS4xNyAyLjYyLTIuMDItLjYtLjc3LTIuNiAyIC4zMS0xLjg2LTEuMTcuOS0uNDQgMi41OCAyLjYuMjV6bS0xMS43IDguMThsLTEuNDEtMS44NC0uMjggMi45Ny0zLjE0LTQuMS0xLjIxLjk0IDMuMTIgNC4wNy0yLjkxLS41IDEuNDIgMS44NCA0LjAzLjY5LjM4LTQuMDd6bTQuMTEtMzEuNDFsMS40OC4xOS0xLjIyLTEuNDcgMy4yNy40My4xMy0uOTYtMy4yNi0uNDMgMS41NC0xLjEtMS40Ny0uMTktMi4xMyAxLjUxIDEuNjYgMi4wMnptLTE0LjA1LTIuNDlsLjMtMi4zLTIuMyAxLjkxLjY3LTUuMTItMS41MS0uMi0uNjcgNS4wOS0xLjcyLTIuNDEtLjI5IDIuMyAyLjM2IDMuMzQgMy4xNi0yLjYxem0yNS4xMS0xOS4zbC45MSAxLjE3LjE3LTEuOSAyLjAxIDIuNjIuNzgtLjYtMi0yLjYgMS44Ni4zMS0uOS0xLjE3LTIuNTgtLjQ0LS4yNSAyLjYxek0zNS4xIDI4LjExbDEuODQtMS40LTIuOTctLjI4IDQuMDktMy4xNC0uOTMtMS4yMS00LjA3IDMuMTEuNDktMi45MS0xLjgzIDEuNDItLjcgNC4wMyA0LjA4LjM4em0zMS40MSA0LjEybC0uMiAxLjQ3IDEuNDctMS4yMi0uNDMgMy4yNy45OC4xMy40Mi0zLjI1IDEuMSAxLjUzLjE5LTEuNDctMS41MS0yLjEzLTIuMDIgMS42N3pNNjkgMTguMTdsMi4zLjMtMS45LTIuMjkgNS4xMS42Ni4xOS0xLjUxLTUuMDgtLjY3IDIuNC0xLjcxLTIuMjktLjMtMy4zNCAyLjM3TDY5IDE4LjE3em02LjkyIDUuMzhsLTEuNzktLjQ4IDEuMjcgMi4wMi0zLjk5LTEuMDctLjMxIDEuMTkgMy45NiAxLjA2LTIuMDkgMS4xMSAxLjguNDggMi44OS0xLjU0LTEuNzQtMi43N3oiIGZpbGw9IiM4ZGMxNDEiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik03OTUuNTMgMjg4LjE0Yy00IDAtNi0yLjU2LTYtNy40MyAwLTUuMTQgMi4zOS03LjM4IDYuMTEtNy4zOGE3LjQyIDcuNDIgMCAwMTMuMzcuNzIgNSA1IDAgMDEtLjM2IDEuMTEgNi4xMSA2LjExIDAgMDAtMy0uNzVjLTMuMjIgMC00Ljc4IDEuNjktNC43OCA2LjM5IDAgNC4yMSAxLjQxIDYuMjYgNC43IDYuMjZhNi4xOCA2LjE4IDAgMDAzLjQtLjk0IDYuNTcgNi41NyAwIDAxLjM2IDEuMTEgNy40MyA3LjQzIDAgMDEtMy44Ljkxem0xMC41NyAwYy0yLjczIDAtNC40OC0xLjY0LTQuNDgtNS43OCAwLTMuNzYgMS44Ni01Ljc5IDQuNTctNS43OXM0LjUzIDEuNTIgNC41MyA1Ljc5YzAgNC4wMS0xLjk5IDUuNzgtNC42MiA1Ljc4em0uMDktMTAuNTJjLTEuODQgMC0zLjM1Ljg5LTMuMzUgNC43NCAwIDMuNjkgMS4yNiA0Ljc0IDMuMjggNC43NHMzLjM4LTEgMy4zOC00Ljc0LTEuMzMtNC43NC0zLjMxLTQuNzR6bTIwLjkxIDEwLjMxdi04LjEzYTEuOTMgMS45MyAwIDAwLTIuMTQtMi4xNCA0LjI3IDQuMjcgMCAwMC0zIDEuMTd2OS4xaC0xLjEzdi04LjEzYTIgMiAwIDAwLTIuMi0yLjE0IDQuNTQgNC41NCAwIDAwLTIuOTMgMS4xM3Y5LjE0aC0xLjEzdi0xMS4wOGE1Ljg1IDUuODUgMCAwMTEuMTMtLjExdjEuMDloLjA3YTQuMTIgNC4xMiAwIDAxMy0xLjI2IDIuNzggMi43OCAwIDAxMi43MyAxLjU2IDUuMTcgNS4xNyAwIDAxMy42MS0xLjU2YzEuNjUgMCAzLjEuNzMgMy4xIDMuMzF2OC4wNXptOS4yLjIxYTYuMzEgNi4zMSAwIDAxLTIuMzUtLjQ3djQuNjZoLTEuMTN2LTE1LjQ4YTUuOTMgNS45MyAwIDAxMS4xMy0uMTF2MWguMDVhNC45MSA0LjkxIDAgMDEzLjMxLTEuMTdjMi4yNCAwIDMuODggMS40NyAzLjg4IDUuNDUuMDIgNC4zNS0xLjgxIDYuMTItNC44OSA2LjEyem0uNzUtMTAuNWE1LjI3IDUuMjcgMCAwMC0zLjEgMS4wN3Y3Ljg4YTYuMDggNi4wOCAwIDAwMi40NC41MWMyLjM3IDAgMy42MS0xLjI4IDMuNjEtNC45MXMtMS4xMy00LjU1LTIuOTUtNC41NXptMTQuNTIgMTAuMjl2LTFoLS4wNmE2LjExIDYuMTEgMCAwMS0zLjU1IDEuMTdjLTEuNjQgMC0zLS43Mi0zLTMuMjh2LThhNi4xMiA2LjEyIDAgMDExLjE0LS4xMXY4LjE4YzAgMS4yNi41NSAyLjE0IDIgMi4xNGE2LjA4IDYuMDggMCAwMDMuNDQtMS4wN3YtOS4xNGE2IDYgMCAwMTEuMTQtLjExdjExLjE5em04Ljk5LjIxYy0yIDAtMi43My0xLjA2LTIuNzMtMy4yOHYtNy4xMmgtMS4zOXYtMWgxLjM5di0yLjQ3YTMuOTEgMy45MSAwIDAxMS4xMy0uMjJ2Mi42OWgyLjc2YTcuMjggNy4yOCAwIDAxLS4wOSAxSDg1OVYyODVjMCAxLjU4LjM5IDIuMSAxLjU2IDIuMWE0LjQgNC40IDAgMDAxLjY1LS4zNSAzLjc1IDMuNzUgMCAwMS4xOSAxLjA3IDQuMzIgNC4zMiAwIDAxLTEuODQuMzJ6bTEyLjA1LTUuODNoLTYuOTJ2LjEzYzAgMy4wOC44OCA0LjY0IDMuNjUgNC42NGE1LjI2IDUuMjYgMCAwMDIuNzEtLjczIDQuODggNC44OCAwIDAxLjM3IDEgNi4yNCA2LjI0IDAgMDEtMy4xNC43NmMtMy4xNiAwLTQuNzgtMS43OS00Ljc4LTUuNjMgMC00LjMgMS45LTUuOTQgNC4zMS01Ljk0czMuODQgMS40MSAzLjg0IDQuMTljMCAuNS0uMDIgMS4wNy0uMDQgMS41OHptLTYuOS0uODloNS44MXYtLjczYzAtMi4yOC0xLjA5LTMuMTYtMi43Ny0zLjE2cy0yLjkzIDEuMTEtMy4wNCAzLjg5em0xOC41Mi42NmgtMi4zMXY1Ljg1aC0xLjE5di0xNC4yNGEyMy4xMyAyMy4xMyAwIDAxMy41OS0uM2MyLjQ3IDAgNC43NiAxLjEzIDQuNzYgNC4zMSAwIDMuMDEtMi4zMSA0LjM4LTQuODUgNC4zOHptLjExLTcuNjljLS41MiAwLTEuMzkuMDctMi40Mi4xN3Y2LjQ5SDg4NGMyLjI1IDAgMy44NS0uODkgMy44NS0zLjM1cy0xLjY4LTMuMzEtMy41MS0zLjMxem0xMy4yMiAzLjQ2YTMuNzggMy43OCAwIDAwLS45NC0uMTFjLS43NSAwLTEuNTYuMTEtMi43OCAxLjU0djguNjVoLTEuMTN2LTExLjA4YTUuNzggNS43OCAwIDAxMS4xMy0uMTF2MS40MWguMDZjMS4zNS0xLjQ1IDIuMTgtMS41OCAyLjg3LTEuNThhMy4xNSAzLjE1IDAgMDEuOTEuMTEgOCA4IDAgMDEtLjEyIDEuMTd6bTYuNzUgMTAuMjljLTIuNzQgMC00LjQ5LTEuNjQtNC40OS01Ljc4IDAtMy43NiAxLjg2LTUuNzkgNC41Ny01Ljc5czQuNTMgMS41MiA0LjUzIDUuNzljMCA0LjAxLTEuOTkgNS43OC00LjYxIDUuNzh6bS4wOC0xMC41MmMtMS44NCAwLTMuMzUuODktMy4zNSA0Ljc0IDAgMy42OSAxLjI2IDQuNzQgMy4yOSA0Ljc0czMuMzctMSAzLjM3LTQuNzQtMS4zMi00Ljc0LTMuMzEtNC43NHptNi40MSAxNC45MmEzLjc5IDMuNzkgMCAwMS0uMTktMS4wOWMxLjYtLjEyIDIuMTUtMSAyLjE1LTIuNDV2LTEyLjIyaDEuMTNWMjg5YTMuMjMgMy4yMyAwIDAxLTMuMDkgMy41NHptMi41Mi0xOC4yMWEuNzEuNzEgMCAwMS0uNzMtLjc5Ljc0Ljc0IDAgMTExLjQ4IDAgLjcxLjcxIDAgMDEtLjc1Ljc5em0xMi41MSA3Ljk4aC02Ljkydi4xM2MwIDMuMDguODggNC42NCAzLjY2IDQuNjRhNS4zMiA1LjMyIDAgMDAyLjcxLS43MyA0LjM1IDQuMzUgMCAwMS4zNiAxIDYuMjQgNi4yNCAwIDAxLTMuMTQuNzZjLTMuMTYgMC00Ljc4LTEuNzktNC43OC01LjYzIDAtNC4zIDEuOS01Ljk0IDQuMzEtNS45NHMzLjg1IDEuNDEgMy44NSA0LjE5YzAgLjUtLjAzIDEuMDctLjA1IDEuNTh6bS02Ljg5LS44OWg1LjhhNi4xMSA2LjExIDAgMDAwLS43M2MwLTIuMjgtMS4wOS0zLjE2LTIuNzgtMy4xNnMtMi45NiAxLjExLTMuMDIgMy44OXptMTQuNTQgNi43MmMtMy4yIDAtNC43NC0xLjkyLTQuNzQtNS41OSAwLTQuMzEgMi02IDQuNS02YTguMyA4LjMgMCAwMTIuODIuNDkgMy44NiAzLjg2IDAgMDEtLjIzIDEuMDkgNi40NiA2LjQ2IDAgMDAtMi41Ni0uNTFjLTIgMC0zLjMxIDEuMDktMy4zMSA0LjQ4IDAgMy44NyAxLjE3IDUgMy41IDVhNS4wOSA1LjA5IDAgMDAyLjY1LS42OSA0LjI2IDQuMjYgMCAwMS4yOSAxLjA1IDYuMiA2LjIgMCAwMS0yLjkyLjY4em05LjUyIDBjLTIuMDUgMC0yLjczLTEuMDYtMi43My0zLjI4di03LjEyaC0xLjM5di0xaDEuMzl2LTIuNDdhMy43OCAzLjc4IDAgMDExLjEzLS4yMnYyLjY5aDIuNzZhNy4yOCA3LjI4IDAgMDEtLjA5IDFoLTIuNjdWMjg1YzAgMS41OC4zOSAyLjEgMS41NiAyLjFhNC4zMSA0LjMxIDAgMDAxLjY0LS4zNSAzLjQ0IDMuNDQgMCAwMS4yIDEuMDcgNC4zMiA0LjMyIDAgMDEtMS44LjMyem03LjQ2LTEwLjI2YTQuMjQgNC4yNCAwIDAxLjM3LTEuNzggNC40MiA0LjQyIDAgMDExLTEuNDIgNC40NiA0LjQ2IDAgMDEzLjE3LTEuMjkgNC41MyA0LjUzIDAgMDE0LjE1IDIuNjggNC4zMyA0LjMzIDAgMDEuMzYgMS43NiA0LjQgNC40IDAgMDEtLjM2IDEuNzkgNC40NSA0LjQ1IDAgMDEtMSAxLjQyIDQuNTMgNC41MyAwIDAxLTEuNDMuOTUgNC42NSA0LjY1IDAgMDEtMS43NC4zNCA0LjU3IDQuNTcgMCAwMS0xLjc0LS4zNCA0LjQ1IDQuNDUgMCAwMS0yLjQtMi4zNSA0LjExIDQuMTEgMCAwMS0uMzgtMS43NnptLjczIDBhMy43MiAzLjcyIDAgMDAuMjkgMS41IDMuODUgMy44NSAwIDAwLjgxIDEuMiA0LjA5IDQuMDkgMCAwMDEuMi44MSAzLjkyIDMuOTIgMCAwMDMgMCAzLjcxIDMuNzEgMCAwMDEuMi0uODIgMy41OCAzLjU4IDAgMDAuODEtMS4yMSAzLjg3IDMuODcgMCAwMC4zLTEuNTMgMy43OSAzLjc5IDAgMDAtLjMtMS41IDMuNzQgMy43NCAwIDAwLTItMiAzLjY1IDMuNjUgMCAwMC0xLjUtLjMzIDMuODMgMy44MyAwIDAwLTEuNDguMjkgNC4wOSA0LjA5IDAgMDAtMS4yLjgxIDMuNzggMy43OCAwIDAwLS44MSAxLjIxIDMuODYgMy44NiAwIDAwLS4zMiAxLjU3em0yLjExLTIuNThoMS45YTIuMjQgMi4yNCAwIDAxMS4zOC4zNSAxLjM3IDEuMzcgMCAwMS40NSAxLjE0IDEuMjUgMS4yNSAwIDAxLS40IDEgMS43NiAxLjc2IDAgMDEtMSAuMzlsMS40OSAyLjI4aC0uNzhsLTEuMzQtMi4yaC0xdjIuMjJoLS43MnptLjcyIDIuMzFoMS40MWExLjQ5IDEuNDkgMCAwMC40NS0uMS43MS43MSAwIDAwLjMxLS4yNi44MS44MSAwIDAwLjExLS40OC43Ny43NyAwIDAwLS4xLS40Mi43Mi43MiAwIDAwLS4yNy0uMjUgMS4xMiAxLjEyIDAgMDAtLjM4LS4xMUg5NTR6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjQ0LjQ3IC0xODUuOTQpIi8+PC9zdmc+" width="500px" alt="Logo">
+
+<header id="title-block-header">
+<h1 class="title">Usage Guide for Rack Management</h1> 
+
+
+</header>
+</div>
+<div id="bottom">
+<strong>
+	<p>Date: 2025-03-20</p>
+</strong>
+</div>
+<h1>Table of contents</h1>
+<nav class="toc">
+<ul>
+<li><a href="#license" id="toc-license">License</a></li>
+<li><a href="#scope" id="toc-scope">Scope</a></li>
+<li><a href="#requirements" id="toc-requirements">Requirements</a></li>
+<li><a href="#capabilities" id="toc-capabilities">Capabilities</a>
+<ul>
+<li><a href="#group-operations-in-redfish" id="toc-group-operations-in-redfish">Group Operations in
+Redfish</a></li>
+<li><a href="#update-firmware" id="toc-update-firmware">Update
+Firmware</a></li>
+</ul></li>
+<li><a href="#use-cases" id="toc-use-cases">Use Cases</a>
+<ul>
+<li><a href="#get-fru-info-of-node" id="toc-get-fru-info-of-node">Get
+FRU Info of node</a>
+<ul>
+<li><a href="#get-power-state-of-the-rack" id="toc-get-power-state-of-the-rack">Get power state of the
+rack</a></li>
+</ul></li>
+<li><a href="#get-power-usage-for-rack" id="toc-get-power-usage-for-rack">Get power usage for rack</a></li>
+<li><a href="#set-power-usage-of-rack" id="toc-set-power-usage-of-rack">Set power usage of rack</a></li>
+<li><a href="#get-status-of-psu" id="toc-get-status-of-psu">Get status
+of PSU</a></li>
+<li><a href="#get-power-state-of-node" id="toc-get-power-state-of-node">Get power state of node</a></li>
+<li><a href="#get-power-usage-of-node" id="toc-get-power-usage-of-node">Get power usage of node</a></li>
+<li><a href="#set-power-usage-of-node" id="toc-set-power-usage-of-node">Set power usage of Node</a></li>
+<li><a href="#get-temperature-of-node" id="toc-get-temperature-of-node">Get temperature of Node</a></li>
+<li><a href="#get-status-of-node" id="toc-get-status-of-node">Get status
+of node</a></li>
+<li><a href="#get-status-of-node-cpus" id="toc-get-status-of-node-cpus">Get status of node CPUs</a></li>
+<li><a href="#get-status-of-node-memory" id="toc-get-status-of-node-memory">Get status of node memory</a></li>
+<li><a href="#get-state-of-node-led" id="toc-get-state-of-node-led">Get
+state of node LED</a></li>
+<li><a href="#get-log-from-rack-manager" id="toc-get-log-from-rack-manager">Get log from rack manager</a></li>
+<li><a href="#get-log-from-node" id="toc-get-log-from-node">Get log from
+node</a></li>
+<li><a href="#get-fw-version-on-rack-manager" id="toc-get-fw-version-on-rack-manager">Get FW version on rack
+manager</a></li>
+<li><a href="#get-fw-version-on-node" id="toc-get-fw-version-on-node">Get FW version on node</a></li>
+<li><a href="#get-bmc-fw-version-on-node" id="toc-get-bmc-fw-version-on-node">Get BMC FW version on node</a></li>
+<li><a href="#get-fw-version-of-psu" id="toc-get-fw-version-of-psu">Get
+FW version of PSU</a></li>
+<li><a href="#update-firmware-on-rack-manager-via-pull-method" id="toc-update-firmware-on-rack-manager-via-pull-method">Update Firmware
+on Rack Manager via Pull Method</a></li>
+<li><a href="#push-fw-update-on-rack-manager" id="toc-push-fw-update-on-rack-manager">Push FW Update on Rack
+Manager</a></li>
+<li><a href="#pull-fw-update-on-node" id="toc-pull-fw-update-on-node">Pull FW update on Node</a></li>
+<li><a href="#reset-a-temporary-group-of-nodes" id="toc-reset-a-temporary-group-of-nodes">Reset a temporary group of
+nodes</a></li>
+<li><a href="#reset-a-persistent-group-of-nodes" id="toc-reset-a-persistent-group-of-nodes">Reset a persistent group of
+nodes</a></li>
+<li><a href="#create-a-persistent-set-of-nodes" id="toc-create-a-persistent-set-of-nodes">Create a Persistent Set of
+Nodes</a></li>
+<li><a href="#set-the-boot-order-to-their-defaults-a-persistent-group-of-nodes" id="toc-set-the-boot-order-to-their-defaults-a-persistent-group-of-nodes">Set
+the Boot Order to their defaults a persistent group of nodes</a></li>
+<li><a href="#authorization-between-rack-manager-and-manage-node" id="toc-authorization-between-rack-manager-and-manage-node">Authorization
+between rack manager and manage node</a></li>
+<li><a href="#get-certificate-from-node" id="toc-get-certificate-from-node">Get certificate from node</a></li>
+<li><a href="#place-certificate-on-node" id="toc-place-certificate-on-node">Place certificate on node</a></li>
+<li><a href="#place-token-on-node" id="toc-place-token-on-node">Place
+token on node</a></li>
+<li><a href="#place-certificate-on-rack-manager" id="toc-place-certificate-on-rack-manager">Place certificate on rack
+manager</a>
+<ul>
+<li><a href="#place-token-on-rack-manager" id="toc-place-token-on-rack-manager">Place token on rack
+manager</a></li>
+<li><a href="#place-manifest-on-rack-manager" id="toc-place-manifest-on-rack-manager">Place manifest on rack
+manager</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#security" id="toc-security">Security</a>
+<ul>
+<li><a href="#security-model" id="toc-security-model">Security Model</a>
+<ul>
+<li><a href="#the-necessity-for-tokens-and-manifests-" id="toc-the-necessity-for-tokens-and-manifests-">The necessity for
+tokens and manifests </a></li>
+<li><a href="#attestation" id="toc-attestation">Attestation</a></li>
+</ul></li>
+<li><a href="#process-for-authorization-between-rack-manager-and-managed-node" id="toc-process-for-authorization-between-rack-manager-and-managed-node">Process
+for authorization between rack manager and managed node</a></li>
+<li><a href="#definitions" id="toc-definitions">Definitions</a></li>
+<li><a href="#theory-of-operations" id="toc-theory-of-operations">Theory
+of Operations</a></li>
+<li><a href="#procedure" id="toc-procedure">Procedure</a>
+<ul>
+<li><a href="#initial-conditions" id="toc-initial-conditions">Initial
+conditions</a></li>
+<li><a href="#node-discovery" id="toc-node-discovery">Node
+Discovery</a></li>
+<li><a href="#node-authentication" id="toc-node-authentication">Node
+Authentication</a></li>
+<li><a href="#certificate-revocation-management" id="toc-certificate-revocation-management">Certificate Revocation
+Management</a></li>
+<li><a href="#section" id="toc-section"></a></li>
+</ul></li>
+<li><a href="#flows" id="toc-flows">Flows</a>
+<ul>
+<li><a href="#managed-node-starts-up-discovery-flow" id="toc-managed-node-starts-up-discovery-flow">Managed Node starts up
+(Discovery Flow)</a></li>
+<li><a href="#manageability-manifest-updated" id="toc-manageability-manifest-updated">Manageability Manifest
+Updated</a></li>
+</ul></li>
+<li><a href="#threat-and-risk-model" id="toc-threat-and-risk-model">Threat and Risk Model</a>
+<ul>
+<li><a href="#assets" id="toc-assets">Assets</a></li>
+<li><a href="#adversaries" id="toc-adversaries">Adversaries</a></li>
+<li><a href="#threats" id="toc-threats">Threats</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#revision" id="toc-revision">Revision</a></li>
+<li><a href="#references" id="toc-references">References</a></li>
+</ul>
+</nav>
+<article>
+<h1 id="license">License</h1>
+<p>This work is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+Attribution-ShareAlike 4.0 International License</a>.</p>
+<p><img role="img" src="media/image2.png" style="width:1.37869in;height:0.48237in" /></p>
+<h1 id="scope">Scope</h1>
+<p>This document references requirements and provide the usage examples
+for the OpenRMC northbound API v1.2.0 for a rack management
+controller.</p>
+<h1 id="requirements">Requirements</h1>
+<p>As a Redfish-based interface, the required Redfish interface model
+elements are specified in a profile document. The profile is located at
+–</p>
+<p><a href="https://github.com/opencomputeproject/OCP-Profiles/blob/master/OCPRackManagerController.v1_2_0_WIP.json" class="uri">https://github.com/opencomputeproject/OCP-Profiles/blob/master/OCPRackManagerController.v1_2_0_WIP.json</a></p>
+<p>The OCPRackManagerController.v1.2.0 profile extends from the
+OCPBaselineHardwareManagement.v1.0.1 profile. The profile is located at
+–</p>
+<p><a href="https://github.com/opencomputeproject/OCP-Profiles/blob/master/OCPBaselineHardwareManagement.v1_0_1.json" class="uri">https://github.com/opencomputeproject/OCP-Profiles/blob/master/OCPBaselineHardwareManagement.v1_0_1.json</a></p>
+<p>A profile is read by the Redfish Interop Validator which
+autogenerates and executes the tests against an implementation. The
+Interop Validator generates a test report – in text or HTML format.</p>
+<p>$&gt; python3 RedfishInteropValidator.py profileName –ip
+host:port</p>
+<p>The Interop Validator is open source - located at <a href="https://github.com/DMTF/Redfish-Interop-Validator" class="uri">https://github.com/DMTF/Redfish-Interop-Validator</a>.</p>
+<h1 id="capabilities">Capabilities</h1>
+<p>The OpenRMC API extends from the OCP Baseline Hardware Management
+v1.0 capabilities. The following table lists those capabilities are
+extracted from The “Usage Guide and Requirements for the OCP Baseline
+Hardware Management Profile v1.0.1” document</p>
+<table>
+<caption></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 60%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Use Case</strong></th>
+<th style="text-align: left;"><strong>Management Task</strong></th>
+<th style="text-align: left;"><strong>Requirement</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Account Management</td>
+<td style="text-align: left;"><a href="#get-accounts">Get
+accounts</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Service Management</td>
+<td style="text-align: left;"><a href="#get-sessions">Get
+sessions</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hardware Inventory</td>
+<td style="text-align: left;"><a href="#get-fru-info">Get FRU
+info</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-and-set-asset-tag">Get and
+Set the Asset Tag</a></td>
+<td style="text-align: left;">Recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hardware Location</td>
+<td style="text-align: left;"><a href="#get-location-led">Get location
+LED</a></td>
+<td style="text-align: left;">Recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#set-location-led">Set location
+LED</a></td>
+<td style="text-align: left;">Recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;">Status</td>
+<td style="text-align: left;"><a href="#get-chassis-status">Get Chassis
+status</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Power</td>
+<td style="text-align: left;"><a href="#get-power-state">Get power
+state</a></td>
+<td style="text-align: left;">If implemented, mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-power-usage">Get power
+usage</a></td>
+<td style="text-align: left;">Recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-power-limit">Get power
+limit</a></td>
+<td style="text-align: left;">Recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;">Temperature</td>
+<td style="text-align: left;"><a href="#get-temperature">Get
+temperature</a></td>
+<td style="text-align: left;">If implemented, mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-temperature-thresholds">Get
+temperature thresholds</a></td>
+<td style="text-align: left;">If implemented, recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cooling</td>
+<td style="text-align: left;"><a href="#get-fan-speeds">Get fan
+speeds</a></td>
+<td style="text-align: left;">If implemented, mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-fan-redundancy">Get fan
+redundancy</a></td>
+<td style="text-align: left;">If implemented, recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;">Log</td>
+<td style="text-align: left;"><a href="#get-log-entry">Get log
+entry</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#clear-system-log">Clear system
+log</a></td>
+<td style="text-align: left;">Recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;">Management Controller</td>
+<td style="text-align: left;"><a href="#get-firmware-version">Get
+firmware version</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-controller-status">Get
+controller status</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-network-info">Get network
+info</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#reset-controller">Reset
+controller</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Baseline Capabilities</li>
+</ul>
+<p>The following are the usages and capabilities of the OpenRMC
+interface which are incremental to the OCP Baseline Hardware Management
+capabilities.</p>
+<table>
+<caption></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 60%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Use Case</strong></th>
+<th style="text-align: left;"><strong>Management Task</strong></th>
+<th style="text-align: left;"><strong>Requirement</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Rack Power Status</td>
+<td style="text-align: left;"><a href="#get-power-state-of-rack">Get
+power state of rack</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-power-usage-of-rack">Get
+power usage of rack</a></td>
+<td style="text-align: left;">Recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;">Rack Power Control</td>
+<td style="text-align: left;"><a href="#set-power-usage-of-rack">Set
+power usage of reack</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">PSU State/Health</td>
+<td style="text-align: left;"><a href="#get-state-of-PSU">Get state of
+PSU</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Node inventory</td>
+<td style="text-align: left;"><a href="#get-fru-info-of-node">Get FRU
+Info of node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Node Power Status</td>
+<td style="text-align: left;"><a href="#get-power-state-of-node">Get
+power state of node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-power-usage-of-node">Get
+Power usage of node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Node Power Control</td>
+<td style="text-align: left;"><a href="#set-power-usage-of-node">Set
+Power usage of node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Node Temperature</td>
+<td style="text-align: left;"><a href="#get-temperature-per-node">Get
+temperature of node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Node Status/Health</td>
+<td style="text-align: left;"><a href="#get-status/health-of-node">Get
+status/health of node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-status-of-node-cpus">Get
+status of node CPUs</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-status-of-node-memory">Get
+status of node memory</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-state-of-node-LEDs">Get
+state of node LEDs</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#get-logs-from-node">Get logs
+from node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Firmware Update</td>
+<td style="text-align: left;"><a href="#pull-fw-update-on-rack-manager">Pull FW Update on Rack
+Manager</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#push-fw-update-on-rack-manager">Push FW Update on Rack
+Manager</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#pull-fw-update-on-node">Pull FW
+Update on node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#push-fw-update-on-node">Push FW
+Update on node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Group Operations</td>
+<td style="text-align: left;"><a href="#reset-a-temp-group-of-nodes">Reset a temp group of nodes</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#reset-a-persistent-group-of-nodes">Reset a persistent group of
+nodes</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#create-a-persistent-group-of-nodes">Create a persistent group of
+nodes</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#set-boot-order-of-aggregate-to-default">Set boot order of
+aggregate</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;">Authorization</td>
+<td style="text-align: left;"><a href="#get-certificate-from-node">Get
+certificate from node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#place-certificate-on-node">Place
+certificate on node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#place-token-on-node">Place token
+on node</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#place-token-on-rack-manager">Place certificat on rack
+manager</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#place-token-on-rack-manager">Place token on rack manager</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="#place-manifest-on-rack-manager">Place manifest on rack
+manager</a></td>
+<td style="text-align: left;">Mandatory</td>
+</tr>
+</tbody>
+</table>
+<h2 id="group-operations-in-redfish">Group Operations in Redfish</h2>
+<p>Group operations are performed using the AggregationService resource.
+Actions can be performed on temporary groups or persistent groups. A
+temporary group is passed within the action. A persistent group is
+create prior to action and referenced within the action. A persistent
+group is modelled as an Aggregate resource. The AggregateService
+resource contains the Aggregates collection resource whose members are
+Aggregate resources.</p>
+<p>The following command</p>
+
+<pre><code>GET /redfish/v1/AggregationService</code></pre>
+
+<p>The response contains the following fragment. The fragment shows the
+URI for the Aggregate collection resource.</p>
+<p>The fragment shows two actions that can be perform on an aggregate,
+either temporary or persistent. The action is invoke by performing a
+POST to the URI contained in Target property. The contents of the
+request body in desribed in resource whose URI is contained in the
+@Redfish.ActionInfo property.</p>
+
+<pre class="small"><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/AggregationService&quot;,
+  &quot;Id&quot;: &quot;AggregationService&quot;,
+  &quot;ServiceEnabled&quot;: true,
+  &quot;Status&quot;: {
+    &quot;Health&quot;: &quot;OK&quot;,
+    &quot;State: &quot;Enabled&quot;
+  },
+  &quot;Aggregates&quot;: {
+    &quot;@odata.id&quot;: &quot;/redfish/v1/AggregationService/Aggregates&quot;
+  },
+  &quot;Actions&quot;: {
+    &quot;#AggregationService.Reset&quot;: {
+      &quot;target&quot;:
+        &quot;/redfish/v1/AggregationService/Actions/AggregationService.Reset&quot;,
+      &quot;\@Redfish.ActionInfo&quot;:
+        &quot;/redfish/v1/AggregationService/ResetActionInfo&quot;
+    },
+    &quot;#AggregationService.SetDefaultBootOrder&quot;: {
+      &quot;target&quot;:
+        &quot;/redfish/v1/AggregationService/Actions/AggregationService.SetDefaultBootOrder&quot;,
+      &quot;\@Redfish.ActionInfo&quot;:
+        &quot;/redfish/v1/AggregationService/SetDefaultBootOrderActionInfo&quot;
+    }
+  }
+}</code></pre>
+
+<h2 id="update-firmware">Update Firmware</h2>
+<p>The firmware can be updated with a pull or push method. The “Redfish
+Firmware Update Whitepaper” <span class="citation" data-cites="redfish-firmware-update"><a href="#ref-redfish-firmware-update" role="doc-biblioref">[1]</a></span>
+has detail discussion of the firmware update process.</p>
+<p>The main process is for the firmware package to be delivered
+opaquely, and the Redfish Service interprets the firmware package to
+determine the components that are updated. The Targets property can be
+used to guide and constrain this behavior.</p>
+<h1 id="use-cases">Use Cases</h1>
+<p>This section describes how each capability is accomplished by
+interacting via the Redfish Interface.</p>
+<h2 id="get-fru-info-of-node">Get FRU Info of node</h2>
+<p>The hardware inventory for the rack in obtained from the Chassis
+resource representing each node’s hardware.</p>
+
+<pre><code>GET /redfish/v1/Chassis/{id}</code></pre>
+
+<p>The response contains the hardware inventory properties for
+manufacturer, model, SKU, serial number and part number. The AssetTag
+properties is a client writeable property.</p>
+
+<pre><code>{
+  &quot;@odata.type&quot;: &quot;#Chassis.v1_2_0.Chassis&quot;,
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Node1&quot;,
+  &quot;Id&quot;: &quot;Node1&quot;,
+  . . .
+  &quot;ChassisType&quot;: &quot;Node&quot;,
+  &quot;Name&quot;: &quot;Rack Manager Hardware&quot;,
+  &quot;Manufacturer&quot;: &quot;…&quot;
+  &quot;Model&quot;: &quot;RackScale_Rack&quot;,
+  &quot;SKU&quot;: &quot;…&quot;
+  &quot;SerialNumber&quot;: &quot;…&quot;,
+  &quot;PartNumber&quot;: &quot;…&quot;,
+  &quot;AssetTag&quot;: null,
+}</code></pre>
+
+<h3 id="get-power-state-of-the-rack">Get power state of the rack</h3>
+<p>The power state for the rack in obtained from the Chassis resource
+representing the rack hardware.</p>
+
+<pre><code>GET /redfish/v1/Chassis/Rack</code></pre>
+
+<p>The response contains the PowerState properties.</p>
+
+<pre><code>{
+  &quot;@odata.type&quot;: &quot;#Chassis.v1_2_0.Chassis&quot;,
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Rack&quot;,
+  &quot;Id&quot;: &quot;Node1&quot;,
+  &quot;ChassisType&quot;: &quot;Rack&quot;,
+  &quot;PowerState&quot;: &quot;On&quot;
+}</code></pre>
+
+<h2 id="get-power-usage-for-rack">Get power usage for rack</h2>
+<p>The power usage for the rack is obtained from the Power resource
+associated with the rack hardware.</p>
+
+<pre><code>GET /redfish/v1/Chassis/Rack/Power</code></pre>
+
+<p>The response contains the Voltage array properties. The
+PowerConsumedWatts property contains the value of instantaneous power
+usage. The PowerMetrics objects contains statistics (min, max, avg)
+power usage over a duration.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Rack/Power&quot;,
+  &quot;@odata.type&quot;: &quot;#Power.v1_1_0.Power&quot;,
+  &quot;Id&quot;: &quot;Power&quot;,
+  &quot;PowerControl&quot;: \[ {
+    &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Zone1/Power#/PowerControl/0&quot;,
+    &quot;MemberId&quot;: &quot;0&quot;,
+    &quot;Name&quot;: &quot;System Power Control&quot;,
+    &quot;PowerConsumedWatts&quot;: 8000,
+    &quot;PowerMetrics&quot;: {
+      &quot;IntervalInMin&quot;: null,
+      &quot;MinConsumedWatts&quot;: null,
+      &quot;MaxConsumedWatts&quot;: null,
+      &quot;AverageConsumedWatts&quot;: null
+    }
+  } \]
+}</code></pre>
+
+<h2 id="set-power-usage-of-rack">Set power usage of rack</h2>
+<p>The power usage for the rack is modifying the PowerLimit object
+within the Power resource associated with the rack hardware.</p>
+<p>The properties are writeable, so they can be PATCH’ed directly.</p>
+
+<pre><code>PATCH /redfish/v1/Chassis/Rack/Power</code></pre>
+
+<p>With the message</p>
+
+<pre><code>{
+  &quot;PowerLimit&quot;: {
+    &quot;LimitInWatts&quot;: 300
+  }
+}</code></pre>
+
+<p>Note that the PowerLimit complex properties has other properties that
+may be set during the same patch.</p>
+<p>The LimitException property specifies the action if the power limit
+cannot be enforced. The possible values are: “NoAction”, “HardPowerOff”,
+“LogEventOnly”.</p>
+
+<pre><code>{
+  &quot;PowerLimit&quot;: {
+    &quot;LimitInWatts&quot;: 300,
+    &quot;LimitException&quot;: &quot;LogEventOnly&quot;,
+    &quot;CorrectionInMs&quot;: 100
+  }
+}</code></pre>
+
+<h2 id="get-status-of-psu">Get status of PSU</h2>
+<p>The status and health of the power supply unit is obtained from the
+Power resource associated with the rack hardware.</p>
+
+<pre><code>GET /redfish/v1/Chassis/Rack/Power</code></pre>
+
+<p>The status and health of the power supply is obtained from the
+PowerSupplies object within the Power resource associated with the rack
+hardware. Specifically the Status object contains both State and Health
+properties.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Rack/Power&quot;,
+  &quot;@odata.type&quot;: &quot;#Power.v1_1_0.Power&quot;,
+  &quot;Id&quot;: &quot;Power&quot;,
+  &quot;PowerSupplies&quot;: \[ {
+    &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Zone1/Power#/PowerSupplies/0&quot;,
+    &quot;MemberId&quot;: &quot;0&quot;,
+    &quot;Name&quot;: &quot;Power Supply Bay 1&quot;,
+    &quot;Status&quot;: {
+      &quot;State&quot;: &quot;Enabled&quot;,
+      &quot;Health&quot;: &quot;Warning&quot;
+    },
+    &quot;RelatedItem&quot;: \[ {
+    &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Rack&quot;
+    } \]
+  } \]
+}</code></pre>
+
+<h2 id="get-power-state-of-node">Get power state of node</h2>
+<p>The power state for the node in obtained from the Chassis resource
+representing the node chassis or hardware.</p>
+
+<pre><code>GET /redfish/v1/Chassis/Node-1</code></pre>
+
+<p>The response contains the PowerState properties.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Node-1,
+  &quot;ChassisType&quot;: &quot;Node&quot;,
+  &quot;PowerState&quot;: &quot;On&quot;
+}</code></pre>
+
+<h2 id="get-power-usage-of-node">Get power usage of node</h2>
+<p>The power usage for a node is obtained from the Power resource
+associated with the node chassis or hardware.</p>
+
+<pre><code>GET /redfish/v1/Chassis/Node-1/Power</code></pre>
+
+<p>Which responds with the following message. The PowerConsumedWatts
+property contains the value of instantaneous power usage.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Node-1/Power&quot;,
+  &quot;PowerControl&quot;: \[
+    {
+    &quot;Name&quot;: &quot;System Power Control&quot;,
+    &quot;PowerConsumedWatts&quot;: 200
+    }
+  \]
+}</code></pre>
+
+<p>Note, the response also contains a PowerMetrics object. The
+PowerMetricsobject contains statistics regarding the power usage over a
+time interval (minimum, maximum, average).</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Node-1/Power&quot;,
+  &quot;PowerControl&quot;: \[ {
+    &quot;MemberId&quot;: &quot;0&quot;,
+    &quot;PowerMetrics&quot;: {
+      &quot;IntervalInMin&quot;: 1,
+      &quot;MinConsumedWatts&quot;: 197,
+      &quot;MaxConsumedWatts&quot;: 202,
+      &quot;AverageConsumedWatts&quot;: 199
+    }
+  } \]
+}</code></pre>
+
+<h2 id="set-power-usage-of-node">Set power usage of Node</h2>
+<p>The power usage limit for the node is modifying the PowerLimit object
+within the Power resource associated with the node’s chassis or
+hardware.</p>
+<p>The property is PATCH’ed directly. The PATCH is similar to set the
+power limit on the rack, except the URI specifies the node’s Power
+resource, instead of the rack’s Power resource.</p>
+
+<pre><code>PATCH /redfish/v1/Chassis/Node-1/Power</code></pre>
+
+<p>With the message</p>
+
+<pre><code>{
+  &quot;PowerLimit&quot;: {
+    &quot;Limit InWatts&quot;: 300
+  }
+}</code></pre>
+
+<h2 id="get-temperature-of-node">Get temperature of Node</h2>
+<p>The temperature of a node is obtained from the Thermal resource
+subordinate to Chassis resource which represents node’s chassis.</p>
+
+<pre><code>GET /redfish/v1/Chassis/Node-1/Thermal</code></pre>
+
+<p>The response message is shown below. In the Temperatures array
+element whose “PhysicalContext” property has the value of “Intake”, the
+ReadingCelsius property contains the value of temperature.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Node-1/Thermal&quot;,
+  &quot;Temperatures&quot;: \[ {
+    &quot;ReadingCelsius&quot;: 21
+    &quot;PhysicalContext&quot;: &quot;Intake&quot;
+  } \]
+}</code></pre>
+
+<p>In the same array element, properties exists which specify the
+threshold values and the range of the temperature readings.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Node-1/Thermal&quot;,
+  &quot;Temperatures&quot;: \[ {
+    &quot;PhysicalContext&quot;: &quot;Intake&quot;
+    &quot;UpperThresholdNonCritical&quot;: 42,
+    &quot;UpperThresholdCritical&quot;: 42,
+    &quot;UpperThresholdFatal&quot;: 42,
+    &quot;LowerThresholdNonCritical&quot;: 42,
+    &quot;LowerThresholdCritical&quot;: 5,
+    &quot;LowerThresholdFatal&quot;: 42,
+    &quot;MinReadingRangeTemp&quot;: 0,
+    &quot;MaxReadingRangeTemp&quot;: 200
+  } \]
+}</code></pre>
+
+<h2 id="get-status-of-node">Get status of node</h2>
+<p>Redfish models a node as it physical chassis and the logical computer
+system. The relationship between the two resource and specified by
+references. Figure shows how a diagram of the resource tree.</p>
+<p>To determine the status and health the node chassis is obtained by
+retrieving the chassis resource which represent the chassis and
+hardware. or the node.</p>
+
+<pre><code>GET /redfish/v1/Chassis/Node-1</code></pre>
+
+<p>Which responds with the following message. The PowerConsumedWatts
+property contains the value of instantaneous power usage.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Node-1&quot;,
+  &quot;Status&quot;: {
+    &quot;State&quot;: &quot;Enabled&quot;,
+    &quot;Health&quot;: &quot;OK&quot;
+  }
+}</code></pre>
+
+<p>The status and health the node computer system aspect is obtained by
+retrieving the System resource representing the logical aspect of
+the</p>
+
+<pre><code>GET /redfish/v1/System/Node-1</code></pre>
+
+<p>The following message is the response. The System’s Status object
+contains an additional property, HealthRollup.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/System/Node-1&quot;,
+  &quot;Status&quot;: {
+    &quot;State&quot;: &quot;Enabled&quot;,
+    &quot;Health&quot;: &quot;OK&quot;,
+    &quot;HealthRollup&quot;: &quot;OK&quot;
+  }
+}</code></pre>
+
+<p>Which responds with the following message. The PowerConsumedWatts
+property contains the value of instantaneous power usage.</p>
+<h2 id="get-status-of-node-cpus">Get status of node CPUs</h2>
+<p>The status and health the node CPUs is obtained by retrieving the
+System resource which represent the node.</p>
+
+<pre><code>GET /redfish/v1/System/Node-1</code></pre>
+
+<p>The following message is the response. The information of interest is
+contained in the Status object, which is contained by the ProcessSummary
+object.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/System/Node-1&quot;,
+  &quot;ProcessorSummary&quot;: {
+    &quot;Count&quot;: 8,
+    &quot;LogicalProcessorCount&quot;: 256,
+    &quot;Model&quot;: &quot;Multi-Core Intel(R) Xeon(R) processor 7xxx Series&quot;,
+    &quot;Status&quot;: {
+      &quot;State&quot;: &quot;Enabled&quot;,
+      &quot;Health&quot;: &quot;OK&quot;,
+      &quot;HealthRollup&quot;: &quot;OK&quot;
+    }
+  }
+}</code></pre>
+
+<h2 id="get-status-of-node-memory">Get status of node memory</h2>
+<p>The status and health the node’s memory is obtained by retrieving the
+System resource which represent the node.</p>
+
+<pre><code>GET /redfish/v1/System/Node-1</code></pre>
+
+<p>The following message is the response. The information of interest is
+contained in the Status object.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/System/Node-1&quot;,
+  &quot;MemorySummary&quot;: {
+    &quot;TotalSystemMemoryGiB&quot;: 16,
+    &quot;MemoryMirroring&quot;: &quot;System&quot;,
+    &quot;Status&quot;: {
+      &quot;State&quot;: &quot;Enabled&quot;,
+      &quot;Health&quot;: &quot;OK&quot;,
+      &quot;HealthRollup&quot;: &quot;OK&quot;
+    }
+  }
+}</code></pre>
+
+<h2 id="get-state-of-node-led">Get state of node LED</h2>
+<p>The state of the LED is obtained by retrieving the Chassis resource
+which represent the node chassis.</p>
+
+<pre><code>GET /redfish/v1/Chassis/Node-1</code></pre>
+
+<p>The response contain the following fragment. The information of
+interest is the value of the IndicatorLED property.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Node-1&quot;,
+  &quot;IndicatorLED&quot;: &quot;Lit&quot;
+}</code></pre>
+
+<h2 id="get-log-from-rack-manager">Get log from rack manager</h2>
+<p>The RMC log is by retrieving the Log resource, which represent the
+RMC’s log.</p>
+
+<pre><code>GET /redfish/v1/Managers/RMC/LogService/Log</code></pre>
+
+<p>The response contains the following fragment.</p>
+
+<pre class="small"><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Managers/RMC/LogServices/Log&quot;,
+  &quot;Id&quot;: &quot;Log1&quot;,
+  &quot;Name&quot;: &quot;Rack Manager Log&quot;,
+  &quot;Description&quot;:
+    &quot;This log contains entries related to the operation of the BMC&quot;,
+  &quot;MaxNumberOfRecords&quot;: 100,
+  &quot;OverWritePolicy&quot;: &quot;WrapsWhenFull&quot;,
+  &quot;DateTime&quot;: &quot;2020-03-13T04:14:33+06:00&quot;,
+  &quot;DateTimeLocalOffset&quot;: &quot;+06:00&quot;,
+  &quot;ServiceEnabled&quot;: true,
+  &quot;LogEntryType&quot;: &quot;Event&quot;,
+  &quot;Status&quot;: {
+    &quot;State&quot;: &quot;Enabled&quot;,
+    &quot;Health&quot;: &quot;OK&quot;
+  },
+  &quot;Actions&quot;: {
+    &quot;#LogService.ClearLog&quot;: {
+      &quot;target&quot;:
+        &quot;/redfish/v1/Managers/RMC/LogServices/Log/Actions/LogService.ClearLog&quot;
+    }
+  },
+  &quot;Entries&quot;: {
+    &quot;@odata.id&quot;: &quot;/redfish/v1/Managers/RMC/LogServices/Log/Entries&quot;
+  }
+}</code></pre>
+
+<h2 id="get-log-from-node">Get log from node</h2>
+<p>The System’s log are retrieved is obtained by retrieving the Log
+resource which represent the node’s log.</p>
+
+<pre><code>GET /redfish/v1/Systems/Node-1/LogService/Log</code></pre>
+
+<p>The response contains the following fragment.</p>
+
+<pre class="small"><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Systems/Node-1/LogServices/Log&quot;,
+  &quot;Id&quot;: &quot;Log&quot;,
+  &quot;Name&quot;: &quot;System Log&quot;,
+  &quot;Description&quot;:
+    &quot;This log contains entries related to the operation of a system&quot;,
+  &quot;MaxNumberOfRecords&quot;: 1000,
+  &quot;OverWritePolicy&quot;: &quot;WrapsWhenFull&quot;,
+  &quot;DateTime&quot;: &quot;2015-03-13T04:14:33+06:00&quot;,
+  &quot;DateTimeLocalOffset&quot;: &quot;+06:00&quot;,
+  &quot;ServiceEnabled&quot;: true,
+  &quot;LogEntryType&quot;: &quot;Event&quot;,
+  &quot;Status&quot;: {
+    &quot;State&quot;: &quot;Enabled&quot;,
+    &quot;Health&quot;: &quot;OK&quot;
+  },
+  &quot;Actions&quot;: {
+    &quot;#LogService.ClearLog&quot;: {
+      &quot;target&quot;:
+        &quot;/redfish/v1/Systems/Node-1/LogServices/Log/Actions/LogService.ClearLog&quot;
+    }
+  },
+  &quot;Entries&quot;: {
+    &quot;@odata.id&quot;: &quot;/redfish/v1/Systems/Node-1/LogServices/Log/Entries&quot;
+  }
+}</code></pre>
+
+<h2 id="get-fw-version-on-rack-manager">Get FW version on rack
+manager</h2>
+<p>The version of firmware on the rack manager is obtained by retrieving
+the Manager resource which represents the rack manager.</p>
+
+<pre><code>GET /redfish/v1/Managers/RMC</code></pre>
+
+<p>The response contains the following fragment. The information of
+interest is the value of the FirmwareVersion property.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Managers/RMC&quot;,
+  &quot;Id&quot;: &quot;RMC&quot;,
+  &quot;FirmwareVersion&quot;: &quot;1.00&quot;
+}</code></pre>
+
+<h2 id="get-fw-version-on-node">Get FW version on node</h2>
+<p>The version of BIOS firmware on a system is obtained by retrieving
+the System resource which represents the system.</p>
+
+<pre><code>GET /redfish/v1/Systems/{id}</code></pre>
+
+<p>The response contains the following fragment. The information of
+interest is the value of the BiosVersion property.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/System/CS_1&quot;,
+  &quot;Id&quot;: &quot;CS_1&quot;,
+  &quot;BiosVersion&quot;: &quot;P79 v1.00 (09/20/2013)&quot;
+}</code></pre>
+
+<h2 id="get-bmc-fw-version-on-node">Get BMC FW version on node</h2>
+<p>The version of firmware on the BMC on a system is obtained by
+retrieving the Manager resource which represents the BMC of
+interest.</p>
+
+<pre><code>GET /redfish/v1/Managers/BMC_1</code></pre>
+
+<p>The response contains the following fragment. The information of
+interest is the value of the FirmwareVersion property.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Managers/BMC_1&quot;,
+  &quot;Id&quot;: &quot;BMC_1&quot;,
+  &quot;FirmwareVersion&quot;: &quot;1.00&quot;
+}</code></pre>
+
+<h2 id="get-fw-version-of-psu">Get FW version of PSU</h2>
+<p>The version of firmware on the PSU is obtained by retrieving the
+Power resource subordinate to the Chassis resource which represents the
+chassis of interest.</p>
+
+<pre><code>GET /redfish/v1/Chassis/Ch_1/Power</code></pre>
+
+<p>The response contains the following fragment. The information of
+interest is the value of the FirmwareVersion property.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Ch_1/Power&quot;,
+  &quot;Id&quot;: &quot;Power&quot;,
+  &quot;PowerSupplies&quot;: \[
+    {
+      &quot;@odata.id&quot;: &quot;/redfish/v1/Chassis/Ch_1/Power#/PowerSupplies/0&quot;,
+      &quot;MemberId&quot;: &quot;0&quot;,
+      &quot;FirmwareVersion&quot;: &quot;1.00&quot;
+    }
+  \]
+}</code></pre>
+
+<h2 id="update-firmware-on-rack-manager-via-pull-method">Update Firmware
+on Rack Manager via Pull Method</h2>
+<p>To update the firmware on the rack manager via the pull method, the
+client invokes the following command.</p>
+
+<pre><code>POST /redfish/v1/UpdateService/Actions/SimpleUpdate</code></pre>
+
+<p>The POST command includes the following message. The value of the
+ImageURI property is the path to the new rack manager firmware image.
+The message may also include the TransferProtocol, Username and Password
+properties.</p>
+
+<pre><code>POST /redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate
+HTTP/1.1 Content-Type: application/json Content-Length:</code></pre>
+
+
+<pre><code>{
+  &quot;ImageURI&quot;: &quot;https://192.168.1.250/images/rmc_update.bin&quot;,
+  &quot;Target&quot;: \[
+    &quot;/redfish/v1/managers/RMC&quot;
+  \]
+}</code></pre>
+
+<p>If the Redfish service starts a task to handle the firmware update,
+it will respond with a task pointer, TaskMonitorURI. The client monitors
+the task by performing GETs on the TaskMonitorURI and inspects the
+response.</p>
+<h2 id="push-fw-update-on-rack-manager">Push FW Update on Rack
+Manager</h2>
+<p>To update the firmware on the rack manager via the push method, the
+client invokes the following command.</p>
+
+<pre><code>POST /redfish/v1/UpdateService/upload</code></pre>
+
+<p>The POST command includes the following multi-part message</p>
+
+<pre><code>Content-Type: multipart/form-data;
+boundary=---------------------------d74496d66958873e
+Content-Length:
+-----------------------------d74496d66958873e
+Content-Disposition: form-data; name=&quot;UpdateParameters&quot;
+Content-Type: application/json
+{
+  &quot;Target&quot;: \[
+    &quot;/redfish/v1/managers/RMC&quot;
+  \]
+}
+-----------------------------d74496d66958873e
+Content-Disposition: form-data; name=&quot;UpdateFile&quot;;
+filename=&quot;bmc_update.bin&quot;
+Content-Type: application/octet-stream
+\&lt;software image binary\&gt;</code></pre>
+
+<p>Redfish service starts a task to handle the firmware update, it will
+respond with a task pointer, TaskMonitorURI. The client monitors the
+task by performing GETs on the TaskMonitorURI and inspects the
+response.</p>
+<h2 id="pull-fw-update-on-node">Pull FW update on Node</h2>
+<p>The node firmware maybe updated with a pull or push method.</p>
+<p>To update the firmware on a node, the process described above for the
+rack manager firmware can be used with minor changes. The primary change
+is the Target property, if it is used.</p>
+<p>The Target property can specify the components, of interest.</p>
+
+<pre><code>{
+  &quot;Targets&quot;: \[
+    &quot;/redfish/v1/Systems/CS-3&quot;
+    &quot;/redfish/v1/Managers/BMC_3&quot;
+  \]
+}</code></pre>
+
+<p>The Target property can specify the node, of interest.</p>
+
+<pre><code>{
+  &quot;Targets&quot;: \[
+    &quot;/redfish/v1/systems/CS-3&quot;
+  \]
+}</code></pre>
+
+<p>The Targets property can specify the nodes, of interest.</p>
+
+<pre><code>{
+  &quot;Target&quot;: \[
+    &quot;/redfish/v1/systems/CS-1&quot;,
+    &quot;/redfish/v1/systems/CS-3&quot;
+  \]
+}</code></pre>
+
+<h2 id="reset-a-temporary-group-of-nodes">Reset a temporary group of
+nodes</h2>
+<p>To perform a reset of a temporary group, a HTTP POST is invoked. The
+resource URI to use for the POST is determined by inspecting the
+AggregateService resource. The resource URI is the ‘target’ property of
+the within the #Aggregate.Reset property.</p>
+<p>To perform a reset of the group, a POST is invoked to the value of
+the Target property within the #Aggregate.Reset property.</p>
+
+<pre><code>POST /redfish/v1/AggregationService/Actions/Aggregate.Reset</code></pre>
+
+<p>The POST request shall contain a request body. The contents of the
+request body are described by resource specified by the
+@Reddfish.ActionInfo property. The TargetURIs property specifies the
+group to be used. After the group is used, it is forgotten.</p>
+
+<pre><code>{
+  &quot;BatchSize&quot;: 10,
+  &quot;DelayBetweenBatchesInSeconds&quot;: 15,
+  &quot;ResetType&quot;: &quot;ForceRestart&quot;,
+  &quot;TargetURIs&quot;: \[
+    &quot;/redfish/v1/Systems/cluster-node3&quot;,
+    &quot;/redfish/v1/Systems/cluster-node4&quot;
+  \]
+}</code></pre>
+
+<h2 id="reset-a-persistent-group-of-nodes">Reset a persistent group of
+nodes</h2>
+<p>To update a persistent set of nodes, the client invokes the following
+command.</p>
+
+<pre><code>POST /redfish/v1/AggregationService/Aggregates/Agg1/Actions/Aggregate.Reset</code></pre>
+
+<p>The POST command contains a request body. The ResetType property
+specifies what type of reset to perform and is mandatory. The BatchSize
+and DelayBetweenBatechesInSeconds specifies that the reset be done in
+batches, instead of all at the same time.</p>
+
+<pre><code>{
+  &quot;BatchSize&quot;: 10,
+  &quot;DelayBetweenBatchesInSeconds&quot;: 15,
+  &quot;ResetType&quot;: &quot;ForceRestart&quot;
+}</code></pre>
+
+<h2 id="create-a-persistent-set-of-nodes">Create a Persistent Set of
+Nodes</h2>
+<p>The previous usage model assumes that the aggregate, Agg1, already
+exists in the Aggregates collection.</p>
+<p>To create an aggregate, the client invokes the following command.</p>
+
+<pre><code>POST /redfish/v1/AggregationService/Aggregates/Agg1</code></pre>
+
+<p>The response contains the following fragment. The Elements property
+contains the members of the group. The Actions property contains the
+actions that can be performed on the aggregate. An action is invoked by
+POST’ing to the URI value of the Target property with a request body
+containing the properties described in the ActionInfo resource.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/AggregationService/Aggregates/Agg1&quot;,
+  &quot;Id&quot;: &quot;Agg1&quot;,
+  &quot;Name&quot;: &quot;Aggregate One&quot;,
+  &quot;ElementsCount&quot;: 2,
+  &quot;Elements&quot;: \[
+    { &quot;@odata.id&quot;: &quot;/redfish/v1/Systems/cluster-node3&quot; },
+    { &quot;@odata.id&quot;: &quot;/redfish/v1/Systems/cluster-node4&quot; }
+  \]
+}</code></pre>
+
+<h2 id="set-the-boot-order-to-their-defaults-a-persistent-group-of-nodes">Set
+the Boot Order to their defaults a persistent group of nodes</h2>
+<p>To set the boot order of a persistent group of nodes to their default
+boot order, the client invokes the following command.</p>
+
+<pre class="small"><code>POST /redfish/v1/AggregationService/Aggregates/Agg1/Actions/Aggregate.SetDefaultBootOrder</code></pre>
+
+<p>The POST command has no request message.</p>
+<h2 id="authorization-between-rack-manager-and-manage-node">Authorization
+between rack manager and manage node</h2>
+<p>The use cases specified below is the support the process for
+authorization between the rack manager and the managed node as described
+in section 6.</p>
+<h2 id="get-certificate-from-node">Get certificate from node</h2>
+<p>The certificate for a node is retrieved as member of the Certificates
+collection for the node.</p>
+
+<pre><code>GET /redfish/v1/Systems/Node-1/Certificates/Cert-1</code></pre>
+
+<p>The response contains the following fragment.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Systems/Node-1/Certificates/Cert-1&quot;,
+  &quot;Id&quot;: &quot;Cert-1&quot;,
+  &quot;Name&quot;: &quot;HTTPS Certificate&quot;,
+  &quot;CertificateString&quot;:
+    &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----&quot;,
+  &quot;CertificateType&quot;: &quot;PEM&quot;,
+  &quot;Issuer&quot;: {
+    &quot;Country&quot;: &quot;US&quot;,
+    &quot;State&quot;: &quot;Oregon&quot;,
+    &quot;City&quot;: &quot;Portland&quot;,
+    &quot;Organization&quot;: &quot;Contoso&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;ABC&quot;,
+    &quot;CommonName&quot;: &quot;manager.contoso.org&quot;
+  },
+  &quot;Subject&quot;: {
+    &quot;Country&quot;: &quot;US&quot;,
+    &quot;State&quot;: &quot;Oregon&quot;,
+    &quot;City&quot;: &quot;Portland&quot;,
+    &quot;Organization&quot;: &quot;Contoso&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;ABC&quot;,
+    &quot;CommonName&quot;: &quot;manager.contoso.org&quot;
+  },
+  &quot;ValidNotBefore&quot;: &quot;2018-09-07T13:22:05Z&quot;,
+  &quot;ValidNotAfter&quot;: &quot;2019-09-07T13:22:05Z&quot;,
+  &quot;KeyUsage&quot;: \[
+    &quot;ServerAuthentication&quot;
+  \]
+}</code></pre>
+
+<h2 id="place-certificate-on-node">Place certificate on node</h2>
+<p>The certificate is placed on a managed node with the following HTTP
+command.</p>
+
+<pre><code>POST /redfish/v1/Systems/{id}/Certificates/SystemID</code></pre>
+
+<p>The response contains the following fragment. The KeyUsage property
+shall have the value(s) ??.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/System/1/Certificates/SystemID&quot;,
+  &quot;@odata.type&quot;: &quot;#Certificate.v1_1_0.Certificate&quot;,
+  &quot;Id&quot;: &quot;1&quot;,
+  &quot;Name&quot;: &quot;HTTPS Certificate&quot;,
+  &quot;CertificateString&quot;:
+    &quot;-----BEGIN CERTIFICATE-----\n...\n-----END ERTIFICATE-----&quot;,
+  &quot;CertificateType&quot;: &quot;PEM&quot;,
+  &quot;Issuer&quot;: {
+    &quot;CommonName&quot;: &quot;…&quot;,
+    &quot;Organization&quot;: &quot;…&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;…&quot;
+  },
+  &quot;Subject&quot;: {
+    &quot;CommonName&quot;: &quot;…&quot; ,
+    &quot;Organization&quot;: &quot;…&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;…&quot;
+  },
+  &quot;ValidNotBefore&quot;: &quot;2018-09-07T13:22:05Z&quot;,
+  &quot;ValidNotAfter&quot;: &quot;2019-09-07T13:22:05Z&quot;,
+  &quot;KeyUsage&quot;: \[ &quot;KeyCertSign&quot; \]
+}</code></pre>
+
+<h2 id="place-token-on-node">Place token on node</h2>
+<p>The token is placed on a managed node with the following HTTP
+command.</p>
+
+<pre><code>POST /redfish/v1/Systems/{id}/Certificates/Token</code></pre>
+
+<p>The response contains the following fragment. The KeyUsage property
+shall have the value(s) ??.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/System/1/Certificates/Token&quot;,
+  &quot;@odata.type&quot;: &quot;#Certificate.v1_1_0.Certificate&quot;,
+  &quot;Id&quot;: &quot;Token&quot;,
+  &quot;Name&quot;: &quot;HTTPS Certificate&quot;,
+  &quot;CertificateString&quot;:
+    &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----&quot;,
+  &quot;CertificateType&quot;: &quot;PEM&quot;,
+  &quot;Issuer&quot;: {
+    &quot;CommonName&quot;: &quot;…&quot; ,
+    &quot;Organization&quot;: &quot;…&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;…&quot;
+  },
+  &quot;Subject&quot;: {
+    &quot;CommonName&quot;: &quot;…&quot;,
+    &quot;Organization&quot;: &quot;…&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;…&quot;
+  },
+  &quot;ValidNotBefore&quot;: &quot;2018-09-07T13:22:05Z&quot;,
+  &quot;ValidNotAfter&quot;: &quot;2019-09-07T13:22:05Z&quot;,
+  &quot;KeyUsage&quot;: \[ &quot;KeyCertSign&quot; \]
+}</code></pre>
+
+<h2 id="place-certificate-on-rack-manager">Place certificate on rack
+manager</h2>
+<p>The certificate is placed on the rack manager with the following HTTP
+command.</p>
+
+<pre><code>POST /redfish/v1/Managers/\&lt;RackManager\&gt;/Certificates/Certificate</code></pre>
+
+<p>Where &lt;RackManager&gt; is the member in which the “ManagerType”
+property has the value “RackManager”.</p>
+<p>The response contains the following fragment. The KeyUsage property
+shall have the value KeyCertSign.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/\&lt;RackManager\&gt;/1/Certificates/Token&quot;,
+  &quot;@odata.type&quot;: &quot;#Certificate.v1_1_0.Certificate&quot;,
+  &quot;Id&quot;: &quot;1&quot;,
+  &quot;Name&quot;: &quot;HTTPS Certificate&quot;,
+  &quot;CertificateString&quot;:
+    &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----&quot;,
+  &quot;CertificateType&quot;: &quot;PEM&quot;,
+  &quot;Issuer&quot;: {
+    &quot;CommonName&quot;: &quot;…&quot; ,
+    &quot;Organization&quot;: &quot;…&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;…&quot;
+  },
+  &quot;Subject&quot;: {
+    &quot;CommonName&quot;: &quot;…&quot;,
+    &quot;Organization&quot;: &quot;…&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;…&quot;
+  },
+  &quot;ValidNotBefore&quot;: &quot;2018-09-07T13:22:05Z&quot;,
+  &quot;ValidNotAfter&quot;: &quot;2019-09-07T13:22:05Z&quot;,
+  &quot;KeyUsage&quot;: \[ &quot;KeyCertSign&quot; \]
+}</code></pre>
+
+<h3 id="place-token-on-rack-manager">Place token on rack manager</h3>
+<p>The token is placed on the rack manager with the following HTTP
+command.</p>
+
+<pre><code>POST /redfish/v1/Managers/\&lt;RackManager\&gt;/Certificates/Token</code></pre>
+
+<p>Where &lt;RackManager&gt; is the member in which the “ManagerType”
+property has the value “RackManager”.</p>
+<p>The response contains the following fragment. The KeyUsage property
+shall have the value(s) ??.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/\&lt;RackManager\&gt;/1/Certificates/Token&quot;,
+  &quot;@odata.type&quot;: &quot;#Certificate.v1_1_0.Certificate&quot;,
+  &quot;Id&quot;: &quot;1&quot;,
+  &quot;Name&quot;: &quot;HTTPS Certificate&quot;,
+  &quot;CertificateString&quot;:
+    &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----&quot;,
+  &quot;CertificateType&quot;: &quot;PEM&quot;,
+  &quot;Issuer&quot;: {
+    &quot;CommonName&quot;: &quot;…&quot; ,
+    &quot;Organization&quot;: &quot;…&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;…&quot;
+  },
+  &quot;Subject&quot;: {
+    &quot;CommonName&quot;: &quot;…&quot;,
+    &quot;Organization&quot;: &quot;…&quot;,
+    &quot;OrganizationalUnit&quot;: &quot;…&quot;
+  },
+  &quot;ValidNotBefore&quot;: &quot;2018-09-07T13:22:05Z&quot;,
+  &quot;ValidNotAfter&quot;: &quot;2019-09-07T13:22:05Z&quot;,
+  &quot;KeyUsage&quot;: \[ &quot;KeyCertSign&quot; \]
+}</code></pre>
+
+<h3 id="place-manifest-on-rack-manager">Place manifest on rack
+manager</h3>
+<p>The manifest is placed on the rack manager with the following HTTP
+command.</p>
+
+<pre><code>POST /redfish/v1/Managers/rmc/ManageabilityManifest</code></pre>
+
+<p>The request contains the following fragment.</p>
+
+<pre><code>{
+  &quot;@odata.id&quot;: &quot;/redfish/v1/Managers/rmc/ManageabilityManifest&quot;,
+  &quot;@odata.type&quot;: &quot;#ManageabilityManifest.v1_0_0.ManageabilityManifest&quot;,
+  &quot;Id&quot;: &quot;ManageabilityManifest&quot;,
+  &quot;Name&quot;: &quot;Manageability Manift\est&quot;,
+  &quot;NodesToManage&quot;: {
+    {
+      &quot;NodeName&quot;: &quot;node1&quot;,
+      &quot;NodeIDCertificateString&quot;:
+        &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----&quot;,
+      &quot;CertificateType&quot;: &quot;PEM&quot;
+    },
+    {
+      &quot;NodeName&quot;: &quot;node2&quot;,
+      &quot;NodeIDCertificateString&quot;:
+        &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----&quot;,
+      &quot;CertificateType&quot;: &quot;PEM&quot;
+    },
+    {
+      &quot;NodeName&quot;: &quot;switch1&quot;,
+      &quot;NodeIDCertificateString&quot;:
+        &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----&quot;,
+      &quot;CertificateType&quot;: &quot;PEM&quot;
+    },
+    {
+      &quot;NodeName&quot;: &quot;nas1&quot;,
+      &quot;NodeIDCertificateString&quot;:
+        &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----&quot;,
+      &quot;CertificateType&quot;: &quot;PEM&quot;
+    }
+  }
+}</code></pre>
+
+<h1 id="security">Security</h1>
+<h2 id="security-model">Security Model</h2>
+<p>The security model leverages the authentication, and a flow to ensure
+every entity (node, rack manager, CSP) has a certificate. Pushing/update
+certificate could follow the CSP or silicon vendor’s existing flow to
+obtain/update the certificate. The model is RBAC security model, in
+which the CSP is the most privilege entity in the chain (generate token
+for both rack manager and nodes and distributes. CSP also sets up
+manifest and sends it to rack manager. Rack manager is the second in
+hierarchy who has CSPs’ manifest and tokens of all managed nodes. The
+least privilege entity in the chain is node which only possess its own
+token.</p>
+<h3 id="the-necessity-for-tokens-and-manifests-">The necessity for
+tokens and manifests </h3>
+<p>Token is the proof of ownership of a node or rack manager by a CSPs
+and shows which entities on rack belongs to which CSP.  Manifest is the
+list of nodes from a particular CSP that a specific rack manager should
+manage. Tokens are always encrypted in transit that rogue rack manager
+could not manage nodes that are not designated to them.</p>
+<h3 id="attestation">Attestation</h3>
+<p>The authentication flow beyond the possession of a certificate as
+shown in discovery flow (6.6.1). In the discovery flow, both node and
+node manager will authenticate each other’s token which is different
+than the certificate.</p>
+<h2 id="process-for-authorization-between-rack-manager-and-managed-node">Process
+for authorization between rack manager and managed node</h2>
+<p>This section specifies the process by which the rack manager verifies
+that a managed node is one it is authorized to manage, and for a managed
+node to verify that a rack manager is authorized the manage it.</p>
+<h2 id="definitions">Definitions</h2>
+<ul>
+<li><p><strong>Certificate</strong> = X.509 Certificate (All entities,
+node, rack manager and CSP)</p></li>
+<li><p><strong>Node Certificate</strong> = Certificate issued by a CA
+for a node</p></li>
+<li><p><strong>Rack Manager Certificate</strong> = Certificate issued by
+a CA for a rack manager</p></li>
+<li><p><strong>Node Token</strong> = CSP certificate + Node Certificate
+signed by a CSP.</p>
+<ul>
+<li>The node token is created and distribute during initial setup by CSP
+and shows that the managed node belongs to a CSP.</li>
+</ul></li>
+<li><p><strong>Rack Manager Token</strong> = CSP certificate + rack
+manager certificate signed by a CSP.</p>
+<ul>
+<li>The rack manager token is created and distribute during initial
+setup by CSP and shows that the rack manager belongs to a CSP.</li>
+</ul></li>
+<li><p><strong>Manageability Manifest =</strong> CSP certificate + All
+Managed Nodes Token.</p>
+<ul>
+<li><p>The manifest lists the nodes on the rack that the rack manager
+can manage.</p></li>
+<li><p>The manifest is signed b the CSP</p></li>
+<li><p>Each managed node entry shall contain a node token.</p></li>
+</ul></li>
+<li><p><strong>Managed Node List =</strong> Node Certificate + Time
+Stamp of Initial session establishment</p></li>
+</ul>
+<blockquote>
+<p>In the Redfish Certificate Management Whitepaper <span class="citation" data-cites="redfish-certificate-whitepaper"><a href="#ref-redfish-certificate-whitepaper" role="doc-biblioref">[2]</a></span>, the node certificate and rack
+manager certificate are referred to as device identity certificates.</p>
+</blockquote>
+<h2 id="theory-of-operations">Theory of Operations</h2>
+<p>The rack manager is provided a manageability manifest which includes
+a list of nodes that it can managed.</p>
+<p>As the rack manager discovers a node, it obtains the node’s
+certificate and verifies whether the manageability manifest contains the
+node. If so, it proceeds to proof to the node, that it has authority to
+manage the node and challenges to node.</p>
+<h2 id="procedure">Procedure</h2>
+<h3 id="initial-conditions">Initial conditions</h3>
+<ul>
+<li>Initial conditions of node
+<ul>
+<li>Each managed node shall have a node certificate</li>
+<li>Each managed node shall have a node token.</li>
+</ul></li>
+<li>Initial conditions of rack manager
+<ul>
+<li>The rack manager shall have a rack manager certificate</li>
+<li>The rack manager shall have a rack manager token</li>
+<li>The rack manager shall have a manageability manifest</li>
+</ul></li>
+</ul>
+<h3 id="node-discovery">Node Discovery</h3>
+<p>The following procedure is followed when the rack manager first
+discovers the presence of a node.</p>
+<p>The rack manager discovers the presence of the node on its rack and
+asks for nodes’ certificate. During discovery process, the rack manager
+knows nothing about the managed nodes. It could broadcast a message or
+ping to get node’s certificate.</p>
+<p>The rack manager shall attempt to locate the entry for the node in
+manifest.</p>
+<p>If the entry is found, the rack manager shall send part of this
+manifest and random generated challenge ([rack manager token + node
+token + challenge] encrypted by node’s public key) to the node.</p>
+<p>If the entry is not found, the rack manager shall remain silent</p>
+<h3 id="node-authentication">Node Authentication</h3>
+<p>The managed node shall decrypt the message with its own private key.
+It verifies the signature of its own token and rack manager token. This
+authentication indicates that the node manager is the legitimated rack
+manager assigned by CSP for this node.</p>
+<p>If the authentication is successful, the managed node shall send the
+random generated challenge encrypted by rack manager’s public key and
+nuance/time to the rack manager.</p>
+<p>If the authentication is unsuccessful, the managed node shall remain
+silent</p>
+<p>The rack manager shall decrypt and verify the challenge and check the
+freshness of nuance/time. This indicates that the managed node is the
+node that the rack manager has been configured to manage.</p>
+<p>Both rack manager and managed node shall generate session keys based
+on the challenge and nuance/time to establish a connection.</p>
+<p>Rack manager shall retain the node certificate and time stamp at
+which the connection was established.</p>
+<h3 id="certificate-revocation-management">Certificate Revocation
+Management</h3>
+<p>From Rack manager’s perspective, CSP would be in charge of revocation
+of a node, and they would update the manifest and pass it to Rack
+manager to inform it about the revocation status. Rack manager follows
+Update/Revoke flow in 6.6.2 to terminate session for any revoked
+nodes.</p>
+<h3 id="section"></h3>
+<h2 id="flows">Flows</h2>
+<h3 id="managed-node-starts-up-discovery-flow">Managed Node starts up
+(Discovery Flow)</h3>
+<p><img role="img" aria-label="A picture containing graphical user interface Description automatically generated" src="media/image3.png" style="width:5.77292in;height:8.29851in" alt="A picture containing graphical user interface Description automatically generated" /></p>
+<h3 id="manageability-manifest-updated">Manageability Manifest
+Updated</h3>
+<p><img role="img" aria-label="Graphical user interface, application Description automatically generated" src="media/image4.png" style="width:6.5in;height:5.27014in" alt="Graphical user interface, application Description automatically generated" /></p>
+<h2 id="threat-and-risk-model">Threat and Risk Model</h2>
+<h3 id="assets">Assets</h3>
+<p>Node’s Token = CSP cert + Node’s cert signed by CSP Rack Manager’s
+Token = CSP cert + Rack Manager cert signed by CSP Manifest = CSP cert +
+All managed node’s tokens</p>
+<table>
+<caption></caption>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 48%" />
+<col style="width: 16%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Number</strong></th>
+<th style="text-align: left;"><strong>Asset</strong></th>
+<th style="text-align: left;"><strong>Pri/Sec</strong></th>
+<th style="text-align: left;"><strong>Risk</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Node’s Token &amp; Rack Manager Token</td>
+<td style="text-align: left;">Primary</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">CSP’s Manifest</td>
+<td style="text-align: left;">Primary</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">End user’s data or rack resource</td>
+<td style="text-align: left;">Secondary</td>
+<td style="text-align: left;">High</td>
+</tr>
+</tbody>
+</table>
+<p>Reason for Classification 1. This token shows that a node belong to a
+certain CSP. It is a confidential info to preserve CSP’s inventory
+privacy and to mitigate malicious attacks (more in thread model). Token
+are always encrypted in transit. 2. Manifest contains all the nodes that
+should be managed by a rack manager. All tokens are encrypted by rack
+manager’s public key to preserve confidentiality and privacy of tokens
+and mitigate malicious attacks (more in thread model). 3. In transit and
+storage</p>
+<h3 id="adversaries">Adversaries</h3>
+<table>
+<caption></caption>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>#</strong></th>
+<th style="text-align: left;"><strong>Persona</strong></th>
+<th style="text-align: left;"><strong>Motivation</strong></th>
+<th style="text-align: left;"><strong>Attacker Type</strong></th>
+<th style="text-align: left;"><strong>Starting Privilege
+Level</strong></th>
+<th style="text-align: left;"><strong>Skill and Potential Effor
+Level</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Rogue Node</td>
+<td style="text-align: left;">Intentional data exfiltration and access
+to resources</td>
+<td style="text-align: left;">Network Adversary</td>
+<td style="text-align: left;">User-level privilege</td>
+<td style="text-align: left;">Highly skilled</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Rogue Rack Manager</td>
+<td style="text-align: left;">Intentional data exfiltration and managing
+nodes</td>
+<td style="text-align: left;">Network Adversary</td>
+<td style="text-align: left;">High privilege level</td>
+<td style="text-align: left;">Highly skilled</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Malicious Attacker</td>
+<td style="text-align: left;">Intentional data exfiltration and managing
+nodes</td>
+<td style="text-align: left;">Network Adversary</td>
+<td style="text-align: left;">User-level privilege</td>
+<td style="text-align: left;">Highly skilled, dedicated</td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<caption></caption>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Persona</th>
+<th>Motivation</th>
+<th>Attacker Type</th>
+<th>Starting Privilege Level</th>
+<th>Skill and Potential Effort level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td>Rogue Node</td>
+<td>Intentional data exfiltration and access to resources</td>
+<td>Network Adversary</td>
+<td>User-level privileges</td>
+<td>Highly skilled</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Rogue Rack Manager</td>
+<td>Intentional data exfiltration and managing nodes</td>
+<td>Network Adversary</td>
+<td>High privilege level</td>
+<td>Highly skilled</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Malicious Attacker</td>
+<td>Intentional data exfiltration and managing nodes</td>
+<td>Network Adversary</td>
+<td>User-level privilege</td>
+<td>Highly skilled, dedicated</td>
+</tr>
+</tbody>
+</table>
+<h3 id="threats">Threats</h3>
+<table style="width:100%;">
+<caption></caption>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">#</th>
+<th>Threat</th>
+<th>Adversary</th>
+<th style="text-align: center;">Asset</th>
+<th style="text-align: center;">Rank</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td>Attacker intercepts network traffic to gain access to CSP’s manifest
+to add rogue node/rack manager or to discover CSP’s nodes list for
+targeted attack</td>
+<td>Network Adversary</td>
+<td style="text-align: center;">Manifest</td>
+<td style="text-align: center;">H</td>
+<td>CSP’s manifest has list of nodes’ token encrypted by designated rack
+manager’s public key</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>Attacker set up a rogue node/rack manager to access specific CSP’s
+nodes</td>
+<td>Network Adversary</td>
+<td style="text-align: center;">End User’s Data</td>
+<td style="text-align: center;">H</td>
+<td>Nodes and rack managers for a particular CSP have a token (CSP’s
+certificate + Node/Rack Manager certificate signed by CSP). Rogue node’s
+and rogue rack manager’s attempt fails during discover phase without
+valid token.</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td>Attacker sniffs the traffic during CSP’s initial token distribution
+to access legitimate node/rack manager token to set up a rogue node/rack
+manager with reply attack</td>
+<td>Network Adversary</td>
+<td style="text-align: center;">Node/ Rack Manager Token</td>
+<td style="text-align: center;">H</td>
+<td>Node/rack manager’s token are always encrypted during transition
+with node/rack manager’s public key.</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>Rogue node attempts to get added to a CSP’s rack manager</td>
+<td>Network Adversary</td>
+<td style="text-align: center;">End User’s Data</td>
+<td style="text-align: center;">H</td>
+<td>During discovery phase, rack manager checks if node’s certificate is
+part of CSP’s manifest. If not, it logs a “Unrecognized Node on Rack”
+event in its log (no session will establish).</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td>Rogue node attempts to reply a legitimate node certificate</td>
+<td>Network Adversary</td>
+<td style="text-align: center;">End User’s Data</td>
+<td style="text-align: center;">H</td>
+<td>During discovery phase, rack manager will send a challenge encrypted
+by legitimate node’s public key. Node should resend back the challenge
+encrypted by rack manager’s public key. If rack manager could not verify
+the exact challenge sent, it records a “Suspicious Node on Rack” event
+in its log (no session will get established)</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td>Revoked node continues to use resource of the rack</td>
+<td>Network Adversary</td>
+<td style="text-align: center;">Rack Resources</td>
+<td style="text-align: center;">H</td>
+<td>After revocation, CSP sends an updated manifest to rack manager.
+rack manager terminates the session of revoked nodes during updated
+manifest flow. It records “Revoked Node” event in its log.</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td>Rogue rack manager attempts to manage CSP’s nodes</td>
+<td>Network Adversary</td>
+<td style="text-align: center;">End User’s Data</td>
+<td style="text-align: center;">H</td>
+<td>In discovery flow, rack manager send its token to managed node. Node
+verifies rack manager’s token signature to make sure rack manager
+belongs to the same CSPs as itself . If it does not, it logs “Suspicious
+Rack manager” in its log. (no session will get established).</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>Non designated rack manager (belong to the same CSP as the node)
+attempts to manage nodes</td>
+<td>Network Adversary</td>
+<td style="text-align: center;">End User’s Data</td>
+<td style="text-align: center;">H</td>
+<td>In discovery flow, rack manager sends node’s token from its manifest
+as a proof that this rack manager is the designated rack manager for
+that node. Node verifies the node token to make sure rack manager is its
+designated rack manager.</td>
+</tr>
+<tr>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td>Other node managers do not have node’s token (encrypted during
+transit)</td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td>A rogue rack manager attempts to reply legitimate encrypted rack
+manager’s token</td>
+<td>Network Adversary</td>
+<td style="text-align: center;">End User’s Data</td>
+<td style="text-align: center;">H</td>
+<td>In discovery flow, node decrypts rack manager’s token and checks the
+cert in token with the cert that rogue rack manager passes down early in
+discovery flow. Discrepancy leads to the fact that node logs “Suspicious
+Node Manger” event (no session will get establish).</td>
+</tr>
+</tbody>
+</table>
+<h1 id="revision">Revision</h1>
+<table>
+<caption></caption>
+<thead>
+<tr>
+<th>Revision/Version</th>
+<th>Date</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0.0</td>
+<td>6/14/2021</td>
+<td>Released June 2021</td>
+</tr>
+<tr>
+<td>1.1.0</td>
+<td>5/26/2023</td>
+<td>Released</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>3/20/2025</td>
+<td>Draft</td>
+</tr>
+</tbody>
+</table>
+<h1 id="references">References</h1>
+<div class="{$refs}">
+
+</div>
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-redfish-firmware-update" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Redfish Firmware Update White
+Paper.”</span> Distributed Management Task Force. Available: <a href="https://www.dmtf.org/sites/default/files/standards/documents/DSP2062_1.0.0.pdf">https://www.dmtf.org/sites/default/files/standards/documents/DSP2062_1.0.0.pdf</a></div>
+</div>
+<div id="ref-redfish-certificate-whitepaper" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span>“Redfish Certificate Whitepaper.”</span>
+Distributed Management Task Force. Available: <a href="https://www.dmtf.org/sites/default/files/standards/documents/DSP2059_1.1.0.pdf">https://www.dmtf.org/sites/default/files/standards/documents/DSP2059_1.1.0.pdf</a></div>
+</div>
+</div>
+</article>
+</body>
+</html>
